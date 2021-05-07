@@ -1,9 +1,19 @@
 class Main {
 
+  public static final String ANSI_RESET = "\u001B[0m";
+  public static final String ANSI_BLACK = "\u001B[30m";
+  public static final String ANSI_RED = "\u001B[31m";
+  public static final String ANSI_GREEN = "\u001B[32m";
+  public static final String ANSI_YELLOW = "\u001B[33m";
+  public static final String ANSI_BLUE = "\u001B[34m";
+  public static final String ANSI_PURPLE = "\u001B[35m";
+  public static final String ANSI_CYAN = "\u001B[36m";
+  public static final String ANSI_WHITE = "\u001B[37m";
+
   public static void main(String[] args) {
     
-    Joueur J1 = new Joueur("\u001b[31m");
-    Joueur J2 = new Joueur("\u001b[36m");
+    Joueur J1 = new Joueur(ANSI_RED);
+    Joueur J2 = new Joueur(ANSI_CYAN);
     Joueur[] joueurs = {J1, J2};
     int tour = 0;
     Piece[][] plateau = initialiserPlateau(J1, J2);
@@ -48,35 +58,33 @@ class Main {
   public static void affichePlateau(Piece[][] plateau){
     
     String affichage = "";
-    affichage += "■\u001b[30m";
+    affichage += ANSI_BLACK + "■";
     for(int i = 0; i < plateau.length; i++){
       affichage += (i + 1) % 10;
     }
-    affichage += "\u001b[0m\n";
+    affichage += "■" + ANSI_RESET + "\n";
     
     for (int y = 0; y < plateau.length; y++){
-      affichage += (y + 1) % 10;
+      affichage += ANSI_BLACK + (y + 1) % 10 + ANSI_RESET;
       for (int x = 0; x < plateau[y].length ; x++) {
         if ((y + x) % 2 == 0) {
-          affichage += "\u001b[30m"+"█"+"\u001b[0m";
+          affichage += ANSI_BLACK + "█" + ANSI_RESET;
         } else {
           Piece piece = plateau[x][y];
           if (piece instanceof Piece) {
-            affichage += piece.toString() + "\u001b[0m";
+            affichage += piece.toString() + ANSI_RESET;
           } else {
             affichage += " ";
           }
         }
       }
-      affichage += (y + 1) % 10;
-      affichage += "\n";
+      affichage += ANSI_BLACK + (y + 1) % 10 + ANSI_RESET + "\n";
     }
-    affichage += "■\u001b[30m";
+    affichage += ANSI_BLACK + "■";
     for(int i = 0; i < plateau.length; i++){
       affichage += (i + 1) % 10;
     }
-    affichage += "\u001b[0m\n";
+    affichage += "■" + ANSI_RESET + "\n";
     System.out.println(affichage);
-    System.out.println();
   }
 }
