@@ -10,6 +10,8 @@ class Main {
   public static final String ANSI_CYAN = "\u001B[36m";
   public static final String ANSI_WHITE = "\u001B[37m";
 
+  static final String CORNER_SYMBOL = "■";
+
   public static void main(String[] args) {
     
     Joueur J1 = new Joueur(ANSI_RED);
@@ -46,29 +48,34 @@ class Main {
         if (y < 4) {
 
           plateau[x][y] = new Pion(J1, y, x);
-        } else if (y > 5){
+        } else if (y > 5) {
           plateau[x][y] = new Pion(J2, y, x);
         }
       }
     }
-
     return plateau;
   }
 
   public static void affichePlateau(Piece[][] plateau){
-    
+     
     String affichage = "";
-    affichage += ANSI_BLACK + "■";
-    for(int i = 0; i < plateau.length; i++){
-      affichage += (i + 1) % 10;
-    }
-    affichage += "■" + ANSI_RESET + "\n";
+    String bordure_ligne = "";
     
+    bordure_ligne += ANSI_BLACK + CORNER_SYMBOL;
+    for(int i = 0; i < plateau.length; i++){
+      bordure_ligne += " " + (i + 1) % 10;
+    }
+    bordure_ligne += " " + CORNER_SYMBOL + ANSI_RESET;
+    
+    affichage += bordure_ligne  + "\n";
     for (int y = 0; y < plateau.length; y++){
       affichage += ANSI_BLACK + (y + 1) % 10 + ANSI_RESET;
+      if (y % 2 == 1) {
+        affichage += " ";
+      }
       for (int x = 0; x < plateau[y].length ; x++) {
         if ((y + x) % 2 == 0) {
-          affichage += ANSI_BLACK + "█" + ANSI_RESET;
+          affichage += ANSI_BLACK + "▐█▌" + ANSI_RESET;
         } else {
           Piece piece = plateau[x][y];
           if (piece instanceof Piece) {
@@ -78,13 +85,12 @@ class Main {
           }
         }
       }
+      if (y % 2 == 0) {
+        affichage += " ";
+      }
       affichage += ANSI_BLACK + (y + 1) % 10 + ANSI_RESET + "\n";
     }
-    affichage += ANSI_BLACK + "■";
-    for(int i = 0; i < plateau.length; i++){
-      affichage += (i + 1) % 10;
-    }
-    affichage += "■" + ANSI_RESET + "\n";
+    affichage += bordure_ligne  + "\n";
     System.out.println(affichage);
   }
 }

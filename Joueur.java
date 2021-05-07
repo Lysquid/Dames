@@ -1,7 +1,6 @@
 import java.util.Scanner;
 class Joueur {
   
-  boolean c;
   Piece[] pieces;
   String couleur;
   int[] historiqueCoups;
