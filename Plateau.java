@@ -12,10 +12,10 @@ public class Plateau {
 
         for (int y = 0; y < grille.length; y++) {
             for (int x = (y + 1) % 2; x < grille[y].length; x += 2) {
-                if (y < 4) {
-                    setPiece(new Pion(J1), x, y);
-                } else if (y > 5) {
+                if (y < taille / 2 - 1) {
                     setPiece(new Pion(J2), x, y);
+                } else if (y > (taille + 1) / 2) {
+                    setPiece(new Pion(J1), x, y);
                 }
             }
         }

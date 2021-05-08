@@ -57,9 +57,9 @@ public class Affichage {
     }
 
     public static void effaceEcran() {
-      /**
-       * Fonction fournie sur discord pour effacer l'écran
-       */
+        /**
+         * Fonction fournie sur discord pour effacer l'écran
+         */
         try {
             String os = System.getProperty("os.name");
             if (os.contains("Windows")) {
@@ -80,22 +80,26 @@ public class Affichage {
         String[] coord = new String[2];
         while (!formatLegal) {
             System.out.print(joueur.toString() + " > ");
+
             try {
-              coord[1] = String.valueOf(scanner.nextInt());
-              coord[2] = String.valueOf(scanner.nextInt());
-              for (int i = 0; i < 2; i++) {
-                for (int j = 0; j < 2; j++) {
-                  coup[i][j] = (Character.getNumericValue(coord[i].charAt(j)));
+                coord[0] = String.valueOf(scanner.nextInt());
+                coord[1] = String.valueOf(scanner.nextInt());
+                for (int i = 0; i < 2; i++) {
+                    if (coord[i].length() < 2) {
+                        coord[i] = "0" + coord[i];
+                    }
+                    for (int j = 0; j < 2; j++) {
+                        coup[i][j] = Math.floorMod(Character.getNumericValue(coord[i].charAt(j)) - 1, 10);
+                    }
                 }
-              }
-              System.out.println(coup[0][0] + coup[0][1] + " " + coup[1][0] + coup[1][1]);
-              scanner.next();
-              formatLegal = true;
+                // System.out.println(coup[0][0] + "" + coup[0][1] + " " + coup[1][0] + "" +
+                // coup[1][1]);
+                formatLegal = true;
             } catch (Exception e) {
-              System.out.println(e);
-              System.out.println("Format invalide , réesseyez. Exemple : 12 34");
+                System.out.println(e);
+                System.out.println("Format invalide , réesseyez. Exemple : 72 63");
             }
-            
+
         }
         return coup;
     }

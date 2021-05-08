@@ -2,8 +2,8 @@ public class Main {
 
   public static void main(String[] args) {
 
-    Joueur J1 = new Joueur("J1", Affichage.ANSI_RED);
-    Joueur J2 = new Joueur("J2", Affichage.ANSI_CYAN);
+    Joueur J1 = new Joueur("J1", Affichage.ANSI_CYAN);
+    Joueur J2 = new Joueur("J2", Affichage.ANSI_RED);
     Joueur[] joueurs = { J1, J2 };
 
     Plateau plateau = new Plateau(10);
@@ -21,7 +21,7 @@ public class Main {
       joueurActif = joueurs[tour % 2];
       coupLegal = false;
       while (!coupLegal) {
-        Affichage.demanderCoup(joueurActif);
+        coup = Affichage.demanderCoup(joueurActif);
 
         coupLegal = true;
       }
