@@ -1,22 +1,18 @@
-import java.util.Scanner;
-class Joueur {
-  
-  Piece[] pieces;
-  String couleur;
-  int[] historiqueCoups;
 
-  public Joueur(String couleur) {
+public class Joueur {
+
+  public Piece[] pieces;
+  public String couleur;
+  private String name;
+  public int[] historiqueCoups;
+
+  public Joueur(String name, String couleur) {
+    this.name = name;
     this.couleur = couleur;
   }
 
-  public static int[] coup() {
-    Scanner scanner = new Scanner(System.in);
-    System.out.println( "Saisissez votre coup : " );
-    int x = scanner.nextInt();
-    int y = scanner.nextInt();
-    int coords[] = {x, y};
-    return coords;
+  public String toString() {
+    return couleur + name + Affichage.ANSI_RESET;
   }
-
 
 }

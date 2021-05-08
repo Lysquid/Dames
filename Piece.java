@@ -1,19 +1,16 @@
-class Piece {
+public class Piece {
 
-  int x;
-  int y;
-  String symbol;
-  Joueur joueur;
+  public int x;
+  public int y;
+  public Joueur joueur;
+  protected String symbole;
 
-  public Piece(Joueur joueur, int x, int y) {
-    this.x = x;
-    this.y = y;
+  public Piece(Joueur joueur) {
     this.joueur = joueur;
   }
 
   public String toString() {
-    return joueur.couleur + symbol;
+    return joueur.couleur + symbole + Affichage.ANSI_RESET;
   }
 
 }
-

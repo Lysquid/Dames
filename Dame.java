@@ -1,10 +1,9 @@
-class Dame extends Piece  {
+public class Dame extends Piece {
 
-    public Dame(Joueur joueur, int x, int y) {
-      super(joueur, x, y);
-      symbol = "♛";
+  public Dame(Joueur joueur) {
+    super(joueur);
+    symbole = "♠";
 
-    }
+  }
 
 }
-

@@ -1,11 +1,8 @@
-class Pion extends Piece  {
+public class Pion extends Piece {
 
-    public Pion(Joueur joueur, int x, int y) {
-      super(joueur, x, y);
-      symbol = "●";
-      
-        
-    }
+  public Pion(Joueur joueur) {
+    super(joueur);
+    symbole = "●";
+  }
 
 }
-
