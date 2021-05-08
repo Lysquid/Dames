@@ -2,8 +2,8 @@ public class Main {
 
   public static void main(String[] args) {
 
-    Joueur J1 = new Joueur("J1", Affichage.ANSI_CYAN);
-    Joueur J2 = new Joueur("J2", Affichage.ANSI_RED);
+    Joueur J1 = new Joueur(1, "J1", Affichage.ANSI_CYAN);
+    Joueur J2 = new Joueur(2, "J2", Affichage.ANSI_RED);
     Joueur[] joueurs = { J1, J2 };
 
     Plateau plateau = new Plateau(10);

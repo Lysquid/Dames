@@ -1,12 +1,14 @@
 
 public class Joueur {
 
+  public int id;
   public Piece[] pieces;
   public String couleur;
   private String name;
   public int[] historiqueCoups;
 
-  public Joueur(String name, String couleur) {
+  public Joueur(int id, String name, String couleur) {
+    this.id = id;
     this.name = name;
     this.couleur = couleur;
   }

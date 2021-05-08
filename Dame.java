@@ -2,7 +2,11 @@ public class Dame extends Piece {
 
   public Dame(Joueur joueur) {
     super(joueur);
-    symbole = "♠";
+    if (Affichage.COULEUR_ACTIVEE) {
+      symbole = "♠";
+    } else {
+      symbole = (joueur.id == 1) ? "♠" : "♣";
+    }
 
   }
 

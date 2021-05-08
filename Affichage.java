@@ -2,15 +2,17 @@ import java.util.Scanner;
 
 final public class Affichage {
 
-  public static final String ANSI_RESET = "\u001B[0m";
-  public static final String ANSI_BLACK = "\u001B[30m";
-  public static final String ANSI_RED = "\u001B[31m";
-  public static final String ANSI_GREEN = "\u001B[32m";
-  public static final String ANSI_YELLOW = "\u001B[33m";
-  public static final String ANSI_BLUE = "\u001B[34m";
-  public static final String ANSI_PURPLE = "\u001B[35m";
-  public static final String ANSI_CYAN = "\u001B[36m";
-  public static final String ANSI_WHITE = "\u001B[37m";
+  public static final boolean COULEUR_ACTIVEE = true;
+
+  public static final String ANSI_RESET = COULEUR_ACTIVEE ? "\u001B[0m" : "";
+  public static final String ANSI_BLACK = COULEUR_ACTIVEE ? "\u001B[30m" : "";
+  public static final String ANSI_RED = COULEUR_ACTIVEE ? "\u001B[31m" : "";
+  public static final String ANSI_GREEN = COULEUR_ACTIVEE ? "\u001B[32m" : "";
+  public static final String ANSI_YELLOW = COULEUR_ACTIVEE ? "\u001B[33m" : "";
+  public static final String ANSI_BLUE = COULEUR_ACTIVEE ? "\u001B[34m" : "";
+  public static final String ANSI_PURPLE = COULEUR_ACTIVEE ? "\u001B[35m" : "";
+  public static final String ANSI_CYAN = COULEUR_ACTIVEE ? "\u001B[36m" : "";
+  public static final String ANSI_WHITE = COULEUR_ACTIVEE ? "\u001B[37m" : "";
 
   private static final String SYMBOLE_COIN = "■";
   private static final String SYMBOLE_CASE = "▐█▌";
