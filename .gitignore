@@ -1,2 +1,9 @@
 .vscode
 exemple.draw
+Main.class
+Affichage.class
+Dame.class
+Joueur.class
+Piece.class
+Pion.class
+Plateau.class
