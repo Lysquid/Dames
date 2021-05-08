@@ -96,8 +96,11 @@ public class Affichage {
                 // coup[1][1]);
                 formatLegal = true;
             } catch (Exception e) {
-                System.out.println(e);
+                // System.out.println(e);
                 System.out.println("Format invalide , réesseyez. Exemple : 72 63");
+                while (scanner.hasNext()) {
+                    scanner.next();
+                }
             }
 
         }
