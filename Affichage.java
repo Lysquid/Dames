@@ -27,13 +27,13 @@ final public class Affichage {
 
     bordure_ligne += ANSI_BLACK + SYMBOLE_COIN;
     for (int i = 0; i < plateau.taille; i++) {
-      bordure_ligne += " " + (char)((9-i) % 10 + 64);
+      bordure_ligne += " " + (char)((i+1) % 10 + 64);
     }
     bordure_ligne += " " + SYMBOLE_COIN + ANSI_RESET;
 
     affichage += bordure_ligne + "\n";
     for (int y = 0; y < plateau.taille; y++) {
-      affichage += ANSI_BLACK + (y + 1) % 10 + ANSI_RESET;
+      affichage += ANSI_BLACK + (9-y) % 10 + ANSI_RESET;
       if (y % 2 == 1) {
         affichage += " ";
       }
