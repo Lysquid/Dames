@@ -76,7 +76,7 @@ final public class Affichage {
     }
   }
 
-  public static int[][] demanderCoup(Joueur joueur) {
+  public static Coup demanderCoup(Joueur joueur) {
 
     boolean formatLegal = false;
     int[][] coup = new int[2][2];
@@ -105,7 +105,7 @@ final public class Affichage {
       }
 
     }
-    return coup;
+    return new Coup(coup[0][0], coup[0][1], coup[1][0], coup[1][1], false);
   }
 
   public static int coordToXy(int coord) {

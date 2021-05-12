@@ -14,7 +14,7 @@ public class Main {
     int tour = 0;
     boolean jeu = true;
     boolean coupLegal;
-    int[][] coup;
+    Coup coup;
     Joueur joueurActif;
 
     while (jeu) {
@@ -28,13 +28,13 @@ public class Main {
       while (!coupLegal) {
 
         coupLegaux = joueurActif.calculerCoupsLegaux(plateau);
-
-        
+        coup = Affichage.demanderCoup(joueurActif);
+        plateau.deplacerPiece(coup);
        /* while (!prisePossible){
           prisePossible = coupLegaux.prise;
         }
 
-        coup = Affichage.demanderCoup(joueurActif);
+        
 
         
          
@@ -42,7 +42,7 @@ public class Main {
           cou
           
         }
-        //plateau.deplacerpiece(coup);
+        
         coupLegal = true;
 
         */

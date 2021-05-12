@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Piece {
 
   public int x;
@@ -14,6 +16,8 @@ public class Piece {
     return joueur.couleur + symbole + Affichage.ANSI_RESET;
   }
 
-
+  public ArrayList<Coup> calculerCoupsLegaux(Plateau plateau) {
+    return new ArrayList<Coup>();
+  }
 
 }
