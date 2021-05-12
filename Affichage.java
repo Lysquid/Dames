@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 final public class Affichage {
 
-  public static final boolean COULEUR_ACTIVEE = true;
+  public static final boolean COULEUR_ACTIVEE = false;
 
   public static final String ANSI_RESET = COULEUR_ACTIVEE ? "\u001B[0m" : "";
   public static final String ANSI_BLACK = COULEUR_ACTIVEE ? "\u001B[30m" : "";
@@ -27,7 +27,7 @@ final public class Affichage {
 
     bordure_ligne += ANSI_BLACK + SYMBOLE_COIN;
     for (int i = 0; i < plateau.taille; i++) {
-      bordure_ligne += " " + (i + 1) % 10;
+      bordure_ligne += " " + (char)((9-i) % 10 + 64);
     }
     bordure_ligne += " " + SYMBOLE_COIN + ANSI_RESET;
 
@@ -99,7 +99,7 @@ final public class Affichage {
       }
 
       if (nombreDigitTrouves < 4) {
-        System.out.println("Format invalide , réesseyez. Exemple : 72 63");
+        System.out.println("Format invalide , réessayez. Exemple : 72 63");
       } else {
         formatLegal = true;
       }

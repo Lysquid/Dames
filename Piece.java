@@ -7,10 +7,13 @@ public class Piece {
 
   public Piece(Joueur joueur) {
     this.joueur = joueur;
+    joueur.pieces.add(this);
   }
 
   public String toString() {
     return joueur.couleur + symbole + Affichage.ANSI_RESET;
   }
+
+
 
 }

@@ -32,4 +32,10 @@ public class Plateau {
     piece.y = y;
   }
 
+  public void deplacerPiece(Coup coup) {
+    Piece piece = getPiece(coup.coord_init[0], coup.coord_init[1]);
+    setPiece(null, coup.coord_init[0], coup.coord_init[1]);
+    setPiece(piece, coup.coord_fin[0], coup.coord_fin[1]);
+  }
+
 }
