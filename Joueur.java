@@ -23,7 +23,7 @@ public class Joueur {
   public ArrayList<Coup> calculerCoupsLegaux(Plateau plateau) {
     ArrayList<Coup> coupLegaux = new ArrayList<Coup>();
     for (int i = 0; i < coupLegaux.size(); i++) {
-      coupLegaux.addAll(pieces.get(i).calculerCoupsLegaux());
+      coupLegaux.addAll(pieces.get(i).calculerCoupsLegaux(plateau));
     }
     return coupLegaux;
   }
