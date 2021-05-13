@@ -1,6 +1,7 @@
 .vscode
 exemple.draw
 Main.class
+MaClassePrincipale.class
 Affichage.class
 Dame.class
 Joueur.class
