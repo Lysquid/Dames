@@ -58,8 +58,10 @@ public class MaClassePrincipale {
           } else if (commande.equals("hist")) {
 
           } else if (commande.equals("recommencer")) {
+            coupLegal = true;
             partie = false;
           } else if (commande.equals("quitter")) {
+            coupLegal = true;
             partie = false;
             jeu = false;
           } else {
