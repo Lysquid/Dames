@@ -7,3 +7,4 @@ Joueur.class
 Piece.class
 Pion.class
 Plateau.class
+Coup.class
