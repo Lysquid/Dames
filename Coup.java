@@ -1,9 +1,14 @@
 public class Coup {
 
+  // Coordonnées initiales
   public int x1;
   public int y1;
+  // Coordonnées finales
   public int x2;
   public int y2;
+  // Coordonneés de la prise (si prise il y a)
+  public int x3;
+  public int y3;
   public boolean prise;
 
   public Coup(int x1, int y1, int x2, int y2) {
