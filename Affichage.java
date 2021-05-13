@@ -22,7 +22,6 @@ final public class Affichage {
 
   public static void afficher(Plateau plateau) {
 
-    effaceEcran();
     String affichage = "";
     String bordure_ligne = "";
 
@@ -88,41 +87,44 @@ final public class Affichage {
     int[] coords = new int[4];
 
     int i = 0;
-    int nombreDigitTrouves = 0;
+    int nbCoordTrouvees = 0;
     int coord;
-    while (nombreDigitTrouves < 4 && i < input.length()) {
-      coord = charToCoord(input.charAt(i));
+    while (i < input.length()) {
+
+      coord = charToCoord(input.charAt(i), (nbCoordTrouvees % 2 == 0));
 
       if (0 <= coord && coord <= taille) {
-        coords[nombreDigitTrouves] = coord;
-        nombreDigitTrouves++;
+        if (nbCoordTrouvees < 4) {
+          coords[nbCoordTrouvees] = coord;
+        }
+        nbCoordTrouvees++;
       }
 
       i++;
     }
 
-    if (nombreDigitTrouves < 4) {
-      return null;
-    } else {
+    if (nbCoordTrouvees == 4) {
       return new Coup(coords[0], coords[1], coords[2], coords[3]);
+    } else {
+      return null;
     }
   }
 
-  public static int charToCoord(char caractere) {
+  public static int charToCoord(char caractere, boolean lettre) {
     int coord = (int) caractere;
-    if (coord < 97) {
-      coord -= 48; // chiffre
-    } else {
+    if (lettre) {
       coord -= 97; // lettre
+    } else {
+      coord -= 48; // chiffre
     }
     return coord;
   }
 
   public static char coordToChar(int coord, boolean lettre) {
-    if (!lettre) {
-      coord += 48;
-    } else {
+    if (lettre) {
       coord += 97;
+    } else {
+      coord += 48;
     }
     return (char) (coord);
   }
@@ -139,6 +141,21 @@ final public class Affichage {
     for (Coup coup : listeCoups) {
       System.out.println(coup);
     }
+  }
+
+  public static void aide() {
+    System.out.println();
+    System.out.println("Jeu de Dames");
+    System.out.println("Commandes :");
+    System.out.println("?               Affiche l'aide");
+    System.out.println("!               Liste les coups possibles");
+    System.out.println("*               Affiche à nouveau le plateau");
+    System.out.println("hist            Affiche l'historique des coups joués");
+    System.out.println("recommencer     Recommence une partie");
+    System.out.println("quitter         Quitte le jeu");
+    System.out.println("Entrez votre coup dans le format [position initiale] [poisition finale]");
+    System.out.println("Exemple : a3b4");
+    System.out.println();
   }
 
 }

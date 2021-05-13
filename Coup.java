@@ -18,7 +18,7 @@ public class Coup {
     this.prise = prise;
   }
 
-  public boolean estEgal(Coup coup) {
+  public boolean equals(Coup coup) {
     return (x1 == coup.x1 && y1 == coup.y1 && x2 == coup.x2 && y2 == coup.y2);
   }
 

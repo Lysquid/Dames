@@ -1,19 +1,14 @@
-// import java.util.ArrayList;
+import java.util.ArrayList;
 
-// public class Dame extends Piece {
+public class Dame extends Piece {
 
-// public Dame(Joueur joueur) {
-// super(joueur);
-// if (Affichage.COULEUR_ACTIVEE) {
-// symbole = "♠";
-// } else {
-// symbole = joueur.blanc ? "♠" : "♣";
-// }
+  public Dame(Joueur joueur) {
+    super(joueur);
+    this.symbole = joueur.symbole_dame;
+  }
 
-// public ArrayList<Coup> calculerCoupsLegaux(Plateau plateau) {
-// return new ArrayList<Coup>();
-// }
+  public ArrayList<Coup> calculerCoupsLegaux(Plateau plateau) {
+    return new ArrayList<Coup>();
+  }
 
-// }
-
-// }
+}

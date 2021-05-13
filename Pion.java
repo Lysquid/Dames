@@ -4,11 +4,7 @@ public class Pion extends Piece {
 
   public Pion(Joueur joueur) {
     super(joueur);
-    if (Affichage.COULEUR_ACTIVEE) {
-      symbole = "●";
-    } else {
-      symbole = joueur.blanc ? "●" : "○";
-    }
+    this.symbole = joueur.symbole_pion;
   }
 
   public ArrayList<Coup> calculerCoupsLegaux(Plateau plateau) {

@@ -8,11 +8,21 @@ public class Joueur {
   private String name;
   public int[] historiqueCoups;
 
+  public String symbole_pion;
+  public String symbole_dame;
+
   public Joueur(boolean blanc, String name, String couleur) {
     this.blanc = blanc;
     this.name = name;
     this.couleur = couleur;
     listePieces = new ArrayList<Piece>();
+    if (Affichage.COULEUR_ACTIVEE) {
+      symbole_pion = "●";
+      symbole_dame = "♠";
+    } else {
+      symbole_pion = blanc ? "●" : "○";
+      symbole_dame = blanc ? "♠" : "♣";
+    }
   }
 
   public String toString() {
