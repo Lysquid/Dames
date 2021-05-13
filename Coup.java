@@ -32,4 +32,8 @@ public class Coup {
     return string;
   }
 
+  public boolean surCaseBlanche() {
+    return (x1 + y1) % 2 == 1 || (x2 + y2) % 2 == 1;
+  }
+
 }

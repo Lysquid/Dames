@@ -17,19 +17,14 @@ public class MaClassePrincipale {
 
       boolean partie = true;
       int tour = 0;
-      boolean coupLegal;
-      String commande;
-      Coup coupJoueur;
-      Joueur joueurActif;
 
       while (partie) {
 
         Affichage.effaceEcran();
         Affichage.afficher(plateau);
-        joueurActif = joueurs[tour % 2];
-        coupLegal = false;
+        Joueur joueurActif = joueurs[tour % 2];
+        boolean coupLegal = false;
         boolean prisePossible = false;
-        Piece pieceDeplacee;
 
         ArrayList<Coup> coupsLegaux = joueurActif.calculerCoupsLegaux(plateau);
         ArrayList<Coup> coupsForces = new ArrayList<Coup>();
@@ -43,7 +38,7 @@ public class MaClassePrincipale {
 
         while (!coupLegal) {
 
-          commande = Affichage.demanderCommande(joueurActif);
+          String commande = Affichage.demanderCommande(joueurActif);
 
           if (commande.equals("?")) {
             Affichage.aide();
@@ -66,14 +61,16 @@ public class MaClassePrincipale {
             jeu = false;
           } else {
 
-            coupJoueur = Affichage.ConversionInputCoup(commande, plateau.taille);
+            Coup coupJoueur = Affichage.ConversionInputCoup(commande, plateau.taille);
 
             if (coupJoueur == null) {
               Affichage.erreur("Format invalide. Exemple : b3 a4    ");
             } else {
 
-              pieceDeplacee = plateau.getPiece(coupJoueur.x1, coupJoueur.y1);
-              if (pieceDeplacee == null) {
+              Piece pieceDeplacee = plateau.getPiece(coupJoueur.x1, coupJoueur.y1);
+              if (coupJoueur.surCaseBlanche()) {
+                Affichage.erreur("Le jeu se joue sur les cases noires.");
+              } else if (pieceDeplacee == null) {
                 Affichage.erreur("Il n'y a pas de pas de pièce à cette emplacement.");
               } else if (pieceDeplacee.joueur != joueurActif) {
                 Affichage.erreur("C'est au tour de " + joueurActif + " de jouer.");
