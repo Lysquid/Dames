@@ -1,5 +1,5 @@
 /**
- * L'IDE en ligne que nous avons utilsé (repl.it) requiert l'existence d'une
+ * L'IDE en ligne que nous avons utilsé (replit) requiert l'existence d'une
  * classe nommée Main.java pour lancé le programme. Elle ne fait donc
  * qu'appeller la fonction main de la classe principale
  */
