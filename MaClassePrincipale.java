@@ -87,7 +87,7 @@ public class MaClassePrincipale {
                   i++;
                 }
                 if (!coupLegal) {
-                  Affichage.erreur("Coup invalide (Entrer \"?\" pour la listes des coups possibles).");
+                  Affichage.erreur("Coup invalide (Entrer \"!\" pour la listes des coups possibles).");
                 } else if (prisePossible && !coupJoueur.prise) {
                   Affichage.erreur("Vous avez la possibilté de faire une prise, vous devez donc jouer un tel coup.");
                 } else {
