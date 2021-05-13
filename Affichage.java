@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 final public class Affichage {
 
-  public static final boolean COULEUR_ACTIVEE = false;
+  public static final boolean COULEUR_ACTIVEE = true;
 
   public static final String ANSI_RESET = COULEUR_ACTIVEE ? "\u001B[0m" : "";
   public static final String ANSI_BLACK = COULEUR_ACTIVEE ? "\u001B[30m" : "";
