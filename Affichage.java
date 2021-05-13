@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 final public class Affichage {
@@ -27,13 +28,13 @@ final public class Affichage {
 
     bordure_ligne += ANSI_BLACK + SYMBOLE_COIN;
     for (int i = 0; i < plateau.taille; i++) {
-      bordure_ligne += " " + (char)((i+1) % 10 + 64);
+      bordure_ligne += " " + coordToChar(i, true);
     }
     bordure_ligne += " " + SYMBOLE_COIN + ANSI_RESET;
 
     affichage += bordure_ligne + "\n";
-    for (int y = 0; y < plateau.taille; y++) {
-      affichage += ANSI_BLACK + (9-y) % 10 + ANSI_RESET;
+    for (int y = plateau.taille - 1; y >= 0; y--) {
+      affichage += ANSI_BLACK + coordToChar(y, false) + ANSI_RESET;
       if (y % 2 == 1) {
         affichage += " ";
       }
@@ -43,7 +44,7 @@ final public class Affichage {
         } else {
           Piece piece = plateau.getPiece(x, y);
           if (piece instanceof Piece) {
-            affichage += piece.toString();
+            affichage += piece;
           } else {
             affichage += " ";
           }
@@ -52,7 +53,7 @@ final public class Affichage {
       if (y % 2 == 0) {
         affichage += " ";
       }
-      affichage += ANSI_BLACK + (y + 1) % 10 + ANSI_RESET + "\n";
+      affichage += ANSI_BLACK + coordToChar(y, false) + ANSI_RESET + "\n";
     }
     affichage += bordure_ligne + "\n";
     System.out.println(affichage);
@@ -76,48 +77,68 @@ final public class Affichage {
     }
   }
 
-  public static Coup demanderCoup(Joueur joueur) {
+  public static String demanderCoup(Joueur joueur) {
 
-    boolean formatLegal = false;
-    int[][] coup = new int[2][2];
-    String input;
+    System.out.print(joueur + " > ");
+    return scanner.nextLine();
+  }
 
-    while (!formatLegal) {
-      System.out.print(joueur.toString() + " > ");
+  public static Coup ConversionInputCoup(String input, int taille) {
 
-      input = scanner.nextLine();
+    int[] coords = new int[4];
 
-      int i = 0;
-      int nombreDigitTrouves = 0;
-      while (nombreDigitTrouves < 4 && i < input.length()) {
-        if (Character.isDigit(input.charAt(i))) {
-          int coord = Character.getNumericValue(input.charAt(i));
-          coup[nombreDigitTrouves / 2][nombreDigitTrouves % 2] = coordToXy(coord);
-          nombreDigitTrouves++;
-        }
-        i++;
+    int i = 0;
+    int nombreDigitTrouves = 0;
+    int coord;
+    while (nombreDigitTrouves < 4 && i < input.length()) {
+      coord = charToCoord(input.charAt(i));
+
+      if (0 <= coord && coord <= taille) {
+        coords[nombreDigitTrouves] = coord;
+        nombreDigitTrouves++;
       }
 
-      if (nombreDigitTrouves < 4) {
-        System.out.println("Format invalide , réessayez. Exemple : 72 63");
-      } else {
-        formatLegal = true;
-      }
-
+      i++;
     }
-    return new Coup(coup[0][0], coup[0][1], coup[1][0], coup[1][1], false);
+
+    if (nombreDigitTrouves < 4) {
+      return null;
+    } else {
+      return new Coup(coords[0], coords[1], coords[2], coords[3]);
+    }
   }
 
-  public static int coordToXy(int coord) {
-    return Math.floorMod(coord - 1, 10);
+  public static int charToCoord(char caractere) {
+    int coord = (int) caractere;
+    if (coord < 97) {
+      coord -= 48; // chiffre
+    } else {
+      coord -= 97; // lettre
+    }
+    return coord;
   }
 
-  public static int xyToCoord(int xy) {
-    return (xy + 1) % 10;
+  public static char coordToChar(int coord, boolean lettre) {
+    if (!lettre) {
+      coord += 48;
+    } else {
+      coord += 97;
+    }
+    return (char) (coord);
   }
 
   public static void quitter() {
     scanner.close();
+  }
+
+  public static void ecrire(String texte) {
+    System.out.println(texte);
+  }
+
+  public static void listerCoups(ArrayList<Coup> listeCoups) {
+    for (Coup coup : listeCoups) {
+      System.out.println(coup);
+    }
   }
 
 }

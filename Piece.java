@@ -9,7 +9,7 @@ public class Piece {
 
   public Piece(Joueur joueur) {
     this.joueur = joueur;
-    joueur.pieces.add(this);
+    joueur.listePieces.add(this);
   }
 
   public String toString() {

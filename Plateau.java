@@ -13,9 +13,9 @@ public class Plateau {
     for (int y = 0; y < grille.length; y++) {
       for (int x = (y + 1) % 2; x < grille[y].length; x += 2) {
         if (y < taille / 2 - 1) {
-          setPiece(new Pion(J2), x, y);
-        } else if (y > (taille + 1) / 2) {
           setPiece(new Pion(J1), x, y);
+        } else if (y > (taille + 1) / 2) {
+          setPiece(new Pion(J2), x, y);
         }
       }
     }
@@ -32,10 +32,17 @@ public class Plateau {
     piece.y = y;
   }
 
+  public void remPiece(int x, int y) {
+    /*
+     * 'Remove' pièce : enlève la pièce au coordonnées fournies
+     */
+    grille[x][y] = null;
+  }
+
   public void deplacerPiece(Coup coup) {
-    Piece piece = getPiece(coup.coord_init[0], coup.coord_init[1]);
-    setPiece(null, coup.coord_init[0], coup.coord_init[1]);
-    setPiece(piece, coup.coord_fin[0], coup.coord_fin[1]);
+    Piece piece = getPiece(coup.x1, coup.y1);
+    setPiece(piece, coup.x2, coup.y2);
+    remPiece(coup.x1, coup.y1);
   }
 
 }
