@@ -11,7 +11,7 @@ public class Plateau {
   public void configurationInitiale(Joueur J1, Joueur J2) {
 
     for (int y = 0; y < grille.length; y++) {
-      for (int x = (y + 1) % 2; x < grille[y].length; x += 2) {
+      for (int x = y % 2; x < grille[y].length; x += 2) {
         if (y < taille / 2 - 1) {
           setPiece(new Pion(J1), x, y);
         } else if (y > (taille + 1) / 2) {
@@ -32,17 +32,17 @@ public class Plateau {
     piece.y = y;
   }
 
-  public void remPiece(int x, int y) {
-    /*
-     * 'Remove' pièce : enlève la pièce au coordonnées fournies
-     */
+  /**
+   * Enlève la pièce du plateau au coordonnées fournies
+   */
+  public void enleverPiece(int x, int y) {
     grille[x][y] = null;
   }
 
   public void deplacerPiece(Coup coup) {
     Piece piece = getPiece(coup.x1, coup.y1);
     setPiece(piece, coup.x2, coup.y2);
-    remPiece(coup.x1, coup.y1);
+    enleverPiece(coup.x1, coup.y1);
   }
 
 }

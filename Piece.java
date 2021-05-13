@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Piece {
+abstract public class Piece {
 
   public int x;
   public int y;
@@ -16,8 +16,10 @@ public class Piece {
     return joueur.couleur + symbole + Affichage.ANSI_RESET;
   }
 
-  public ArrayList<Coup> calculerCoupsLegaux(Plateau plateau) {
-    return new ArrayList<Coup>();
-  }
+  /**
+   * Methode abstraite calculant la liste de coups légaux, devant être implémentée
+   * spécifiquement pour chaque type de pièce (pion et dame)
+   */
+  public abstract ArrayList<Coup> calculerCoupsLegaux(Plateau plateau);
 
 }

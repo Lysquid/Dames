@@ -34,22 +34,22 @@ final public class Affichage {
     affichage += bordure_ligne + "\n";
     for (int y = plateau.taille - 1; y >= 0; y--) {
       affichage += ANSI_BLACK + coordToChar(y, false) + ANSI_RESET;
-      if (y % 2 == 1) {
+      if (y % 2 == 0) {
         affichage += " ";
       }
       for (int x = 0; x < plateau.taille; x++) {
         if ((y + x) % 2 == 0) {
-          affichage += ANSI_BLACK + SYMBOLE_CASE + ANSI_RESET;
-        } else {
           Piece piece = plateau.getPiece(x, y);
           if (piece instanceof Piece) {
             affichage += piece;
           } else {
             affichage += " ";
           }
+        } else {
+          affichage += ANSI_BLACK + SYMBOLE_CASE + ANSI_RESET;
         }
       }
-      if (y % 2 == 0) {
+      if (y % 2 == 1) {
         affichage += " ";
       }
       affichage += ANSI_BLACK + coordToChar(y, false) + ANSI_RESET + "\n";
@@ -58,10 +58,10 @@ final public class Affichage {
     System.out.println(affichage);
   }
 
+  /**
+   * Fonction fournie sur discord pour effacer l'écran
+   */
   public static void effaceEcran() {
-    /**
-     * Fonction fournie sur discord pour effacer l'écran
-     */
     try {
       String os = System.getProperty("os.name");
       if (os.contains("Windows")) {
@@ -76,22 +76,22 @@ final public class Affichage {
     }
   }
 
-  public static String demanderCoup(Joueur joueur) {
+  public static String demanderCommande(Joueur joueur) {
 
     System.out.print(joueur + " > ");
     return scanner.nextLine();
   }
 
-  public static Coup ConversionInputCoup(String input, int taille) {
+  public static Coup ConversionInputCoup(String commande, int taille) {
 
     int[] coords = new int[4];
 
     int i = 0;
     int nbCoordTrouvees = 0;
     int coord;
-    while (i < input.length()) {
+    while (i < commande.length()) {
 
-      coord = charToCoord(input.charAt(i), (nbCoordTrouvees % 2 == 0));
+      coord = charToCoord(commande.charAt(i), (nbCoordTrouvees % 2 == 0));
 
       if (0 <= coord && coord <= taille) {
         if (nbCoordTrouvees < 4) {
@@ -133,8 +133,8 @@ final public class Affichage {
     scanner.close();
   }
 
-  public static void ecrire(String texte) {
-    System.out.println(texte);
+  public static void erreur(String texte) {
+    System.out.println(texte + " Réessayez");
   }
 
   public static void listerCoups(ArrayList<Coup> listeCoups) {
@@ -154,7 +154,7 @@ final public class Affichage {
     System.out.println("recommencer     Recommence une partie");
     System.out.println("quitter         Quitte le jeu");
     System.out.println("Entrez votre coup dans le format [position initiale] [poisition finale]");
-    System.out.println("Exemple : a3b4");
+    System.out.println("Exemple : b3 a4");
     System.out.println();
   }
 

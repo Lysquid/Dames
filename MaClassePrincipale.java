@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Main {
+public class MaClassePrincipale {
 
   public static void main(String[] args) {
 
@@ -18,7 +18,7 @@ public class Main {
       boolean partie = true;
       int tour = 0;
       boolean coupLegal;
-      String input;
+      String commande;
       Coup coupJoueur;
       Joueur joueurActif;
 
@@ -28,12 +28,12 @@ public class Main {
         Affichage.afficher(plateau);
         joueurActif = joueurs[tour % 2];
         coupLegal = false;
-        ArrayList<Coup> coupsLegaux;
-        ArrayList<Coup> coupsForces = new ArrayList<Coup>();
         boolean prisePossible = false;
         Piece pieceDeplacee;
 
-        coupsLegaux = joueurActif.calculerCoupsLegaux(plateau);
+        ArrayList<Coup> coupsLegaux = joueurActif.calculerCoupsLegaux(plateau);
+        ArrayList<Coup> coupsForces = new ArrayList<Coup>();
+
         for (Coup coup : coupsLegaux) {
           if (coup.prise) {
             coupsForces.add(coup);
@@ -43,38 +43,40 @@ public class Main {
 
         while (!coupLegal) {
 
-          input = Affichage.demanderCoup(joueurActif);
+          commande = Affichage.demanderCommande(joueurActif);
 
-          if (input.equals("?")) {
+          if (commande.equals("?")) {
             Affichage.aide();
-          } else if (input.equals("!")) {
+          } else if (commande.equals("!")) {
             if (prisePossible) {
               Affichage.listerCoups(coupsForces);
             } else {
               Affichage.listerCoups(coupsLegaux);
             }
-          } else if (input.equals("*")) {
+          } else if (commande.equals("*")) {
             Affichage.afficher(plateau);
-          } else if (input.equals("hist")) {
+          } else if (commande.equals("hist")) {
 
-          } else if (input.equals("recommencer")) {
+          } else if (commande.equals("recommencer")) {
             partie = false;
-          } else if (input.equals("quitter")) {
+          } else if (commande.equals("quitter")) {
             partie = false;
             jeu = false;
           } else {
 
-            coupJoueur = Affichage.ConversionInputCoup(input, plateau.taille);
+            coupJoueur = Affichage.ConversionInputCoup(commande, plateau.taille);
 
             if (coupJoueur == null) {
-              Affichage.ecrire("Format invalide , réessayez. Exemple : a3b4");
+              Affichage.erreur("Format invalide. Exemple : b3 a4    ");
             } else {
 
               pieceDeplacee = plateau.getPiece(coupJoueur.x1, coupJoueur.y1);
               if (pieceDeplacee == null) {
-                Affichage.ecrire("Il n'y a pas de pas de pièce à cette emplacement. Réessayez");
-              } else if (plateau.getPiece(coupJoueur.x1, coupJoueur.y1).joueur != joueurActif) {
-                Affichage.ecrire("C'est au tour de " + joueurActif + " de jouer. Réessayez");
+                Affichage.erreur("Il n'y a pas de pas de pièce à cette emplacement.");
+              } else if (pieceDeplacee.joueur != joueurActif) {
+                Affichage.erreur("C'est au tour de " + joueurActif + " de jouer.");
+              } else if (plateau.getPiece(coupJoueur.x2, coupJoueur.y2) instanceof Piece) {
+                Affichage.erreur("Il y a déjà une pièce à cet emplacement.");
               } else {
 
                 int i = 0;
@@ -86,10 +88,9 @@ public class Main {
                   i++;
                 }
                 if (!coupLegal) {
-                  Affichage.ecrire("Coup invalide, réessayez. (Entrer \"?\" pour la listes des coups possibles)");
+                  Affichage.erreur("Coup invalide (Entrer \"?\" pour la listes des coups possibles).");
                 } else if (prisePossible && !coupJoueur.prise) {
-                  Affichage.ecrire(
-                      "Vous avez la possibilté de faire une prise, vous devez donc jouer un tel coup. Réessayez");
+                  Affichage.erreur("Vous avez la possibilté de faire une prise, vous devez donc jouer un tel coup.");
                 } else {
                   plateau.deplacerPiece(coupJoueur);
                 }
