@@ -9,7 +9,7 @@ public class Plateau {
   }
 
   /**
-   * Methode initialisant le jeu en plaçant les pions de chacun des joueurs sur le   
+   * Methode initialisant le jeu en plaçant les pions de chacun des joueurs sur le
    * plateau de manière réglementaire.
    */
   public void configurationInitiale(Joueur J1, Joueur J2) {
@@ -44,10 +44,10 @@ public class Plateau {
   }
 
   /**
-   * Methode permettant de déplacer un pion sur le plateau et, si une prise est  
+   * Methode permettant de déplacer un pion sur le plateau et, si une prise est
    * effectuée, enlève le pion mangé.
    */
-  
+
   public void jouerCoup(Coup coup) {
     Piece piece = getPiece(coup.x1, coup.y1);
     setPiece(piece, coup.x2, coup.y2);
@@ -55,6 +55,10 @@ public class Plateau {
     if (coup.prise) {
       enleverPiece(coup.x3, coup.y3);
     }
+  }
+
+  public boolean dansPlateau(int x, int y) {
+    return (0 <= x && x < taille && 0 <= y && y < taille);
   }
 
 }

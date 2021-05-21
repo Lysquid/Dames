@@ -164,11 +164,11 @@ final public class Affichage {
     System.out.println();
   }
 
-  public static void fin(Plateau plateau, String texte) {
+  public static void fin(Plateau plateau, int tour, String texte) {
     afficher(plateau);
-    System.out.println();
     System.out.println("Fin de la partie");
     System.out.println(texte);
+    System.out.println("La partie a été jouée en " + tour + " coups.");
     System.out.println();
     aideFin();
   }

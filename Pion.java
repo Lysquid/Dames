@@ -6,10 +6,10 @@ public class Pion extends Piece {
     super(joueur);
     this.symbole = joueur.symbole_pion;
   }
-  
+
   /**
-   * Methode calculant la liste des coups légaux offerts au joueur actif, les coups 
-   * légaux sont ceux permettant un déplacement simple du pion, sans prise.
+   * Methode calculant la liste des coups légaux offerts au joueur actif, les
+   * coups légaux sont ceux permettant un déplacement simple du pion, sans prise.
    */
   public ArrayList<Coup> calculerCoupsLegaux(Plateau plateau) {
     ArrayList<Coup> coupsLegaux = new ArrayList<Coup>();
@@ -23,7 +23,7 @@ public class Pion extends Piece {
         y2 = y - 1;
       }
 
-      if (0 <= x2 && x2 < plateau.taille && 0 <= y2 && y2 < plateau.taille) {
+      if (plateau.dansPlateau(x2, y2)) {
         if (plateau.getPiece(x2, y2) == null) {
           coupsLegaux.add(new Coup(x, y, x2, y2));
         }
@@ -35,8 +35,8 @@ public class Pion extends Piece {
   }
 
   /**
-   * Methode calculant la liste des coups forcés du joueur actif, les coups forcés sont 
-   * ceux où la prise d'un pion de l'équipe adverse est obligatoire.
+   * Methode calculant la liste des coups forcés du joueur actif, les coups forcés
+   * sont ceux où la prise d'un pion de l'équipe adverse est obligatoire.
    */
   public ArrayList<Coup> calculerCoupsForces(Plateau plateau) {
     ArrayList<Coup> coupsForces = new ArrayList<Coup>();
@@ -53,7 +53,7 @@ public class Pion extends Piece {
         y3 = y + j;
         y2 = y + 2 * j;
 
-        if (0 <= x2 && x2 < plateau.taille && 0 <= y2 && y2 < plateau.taille) {
+        if (plateau.dansPlateau(x2, y2)) {
           if (plateau.getPiece(x2, y2) == null && plateau.getPiece(x3, y3) != null) {
             if (plateau.getPiece(x3, y3).joueur != this.joueur) {
               coupsForces.add(new Coup(x, y, x2, y2, x3, y3));

@@ -21,7 +21,7 @@ public class Dame extends Piece {
         x2 = x + i;
         y2 = y + j;
         while (plateau.getPiece(x2, y2) == null) {
-          while (0 <= x2 && 10 >= x2 && 0 <= y2 && 10 >= y2) {
+          while (plateau.dansPlateau(x2, y2)) {
             coupsLegaux.add(new Coup(x, y, x2, y2));
             x2 += i;
             y2 += j;
@@ -48,7 +48,7 @@ public class Dame extends Piece {
         y2 = y + j;
         x3 = x + 2 * i;
         y3 = x + 2 * j;
-        while (0 < x2 && 10 > x2 && 0 < y2 && 10 > y2) {
+        while (plateau.dansPlateau(x2, y2)) {
           while (plateau.getPiece(x2, y2) == null) {
             x2 += i;
             y2 += j;
