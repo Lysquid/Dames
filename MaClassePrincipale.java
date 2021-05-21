@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MaClassePrincipale {
 
@@ -8,9 +9,10 @@ public class MaClassePrincipale {
 
     while (jeu) {
 
-      Joueur J1 = new Joueur(true, "J1", Affichage.ANSI_CYAN);
-      Joueur J2 = new Joueur(false, "J2", Affichage.ANSI_RED);
+      Joueur J1 = new Joueur(true, "J1", Affichage.ANSI_CYAN, true);
+      Joueur J2 = new Joueur(false, "J2", Affichage.ANSI_RED, true);
       Joueur[] joueurs = { J1, J2 };
+      Random generateur = new Random();
 
       Plateau plateau = new Plateau(10);
       plateau.configurationInitiale(J1, J2);
@@ -47,16 +49,26 @@ public class MaClassePrincipale {
             Affichage.afficher(plateau);
           } else if (commande.equals("hist")) {
 
-          } else if (commande.equals("recommencer")) {
+          } else if (commande.equals("abandon")) {
             coupLegal = true;
             partie = false;
+            Affichage.fin(joueurInactif + " remporte la victoire par abandon de " + joueurActif + ".");
           } else if (commande.equals("quitter")) {
             coupLegal = true;
             partie = false;
             jeu = false;
           } else {
 
-            Coup coupJoueur = Affichage.ConversionInputCoup(commande, plateau.taille);
+            Coup coupJoueur;
+            if (joueurActif.ordi && commande.equals("")) {
+              if (coupsForces.isEmpty()) {
+                coupJoueur = coupsLegaux.get(generateur.nextInt(coupsLegaux.size()));
+              } else {
+                coupJoueur = coupsForces.get(generateur.nextInt(coupsForces.size()));
+              }
+            } else {
+              coupJoueur = Affichage.ConversionInputCoup(commande, plateau.taille);
+            }
 
             if (coupJoueur == null) {
               Affichage.erreur("Format invalide. Exemple : b3 a4    ");
@@ -114,14 +126,23 @@ public class MaClassePrincipale {
         }
 
         if (joueurInactif.listePieces.isEmpty()) {
-          Joueur gagnant = joueurActif;
           partie = false;
+          Affichage.fin(joueurActif + " remporte la victoire.");
         }
 
       }
 
-      
-
+      boolean commandeValide = false;
+      while (!commandeValide) {
+        Affichage.aideFin();
+        String commande = Affichage.demanderCommandeFin();
+        if (commande == "r") {
+          commandeValide = true;
+        } else if (commande == "quitter") {
+          jeu = false;
+          commandeValide = true;
+        }
+      }
     }
 
     Affichage.quitter();

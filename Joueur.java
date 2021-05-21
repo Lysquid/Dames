@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Joueur {
 
   public boolean blanc;
+  public boolean ordi;
   public ArrayList<Piece> listePieces;
   public String couleur;
   private String name;
@@ -11,10 +12,11 @@ public class Joueur {
   public String symbole_pion;
   public String symbole_dame;
 
-  public Joueur(boolean blanc, String name, String couleur) {
+  public Joueur(boolean blanc, String name, String couleur, boolean ordi) {
     this.blanc = blanc;
     this.name = name;
     this.couleur = couleur;
+    this.ordi = ordi;
     listePieces = new ArrayList<Piece>();
     if (Affichage.COULEUR_ACTIVEE) {
       symbole_pion = "●";

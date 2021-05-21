@@ -82,7 +82,6 @@ final public class Affichage {
     return scanner.nextLine();
   }
 
-
   /**
    * Methode convertissant l'input de l'utilisateur en un objet coup.
    */
@@ -147,8 +146,8 @@ final public class Affichage {
   }
 
   /**
-   * Methode permettant d'indiquer au joueur quelles valeurs rentrer dans la console afin
-   * qu'il puisse joueur correctement.
+   * Methode permettant d'indiquer au joueur quelles valeurs rentrer dans la
+   * console afin qu'il puisse joueur correctement.
    */
   public static void aide() {
     System.out.println();
@@ -158,11 +157,26 @@ final public class Affichage {
     System.out.println("!               Liste les coups possibles");
     System.out.println("*               Affiche à nouveau le plateau");
     System.out.println("hist            Affiche l'historique des coups joués");
-    System.out.println("recommencer     Recommence une partie");
+    System.out.println("abandon         Abandonné la partie");
     System.out.println("quitter         Quitte le jeu");
     System.out.println("Entrez votre coup dans le format [position initiale] [poisition finale]");
     System.out.println("Exemple : b3 a4");
     System.out.println();
+  }
+
+  public static void fin(String texte) {
+    System.out.println("Fin de la partie");
+    System.out.println(texte);
+  }
+
+  public static void aideFin() {
+    System.out.println("r               Recommencer une partie");
+    System.out.println("quitter         Quitte le jeu");
+  }
+
+  public static String demanderCommandeFin() {
+    System.out.print("> ");
+    return scanner.nextLine();
   }
 
 }
