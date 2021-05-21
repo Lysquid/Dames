@@ -21,7 +21,7 @@ public class Pion extends Piece {
 
       if (0 <= x2 && x2 < plateau.taille && 0 <= y2 && y2 < plateau.taille) {
         if (plateau.getPiece(x2, y2) == null) {
-          coupsLegaux.add(new Coup(x, y, x2, y2, false));
+          coupsLegaux.add(new Coup(x, y, x2, y2));
         }
       }
 
@@ -32,31 +32,27 @@ public class Pion extends Piece {
 
   public ArrayList<Coup> calculerCoupsForces(Plateau plateau) {
     ArrayList<Coup> coupsForces = new ArrayList<Coup>();
-    int x3;
-    int y3;
     int x2;
     int y2;
+    int x3;
+    int y3;
 
     for (int i = -1; i <= 1; i += 2) {
-      x3 = x + i;
-      x2 = x +2*i;
-      if (joueur.blanc) {
-        y3 = y + 1;
-        y2 = y + 2*i;
-      } else {
-        y3 = y - 1;
-        y2 = y -2*i;
-      }
+      for (int j = -1; j <= 1; j += 2) {
 
-      if (0 <= x3 && x3 < plateau.taille && 0 <= y3 && y3 < plateau.taille) {
-        if (plateau.getPiece(x3, y3).joueur != null) {
-          if (plateau.getPiece(x3, y3).joueur != Piece.joueur){
-          coupsForces.add(new Coup(x, y, x2, y2, true));
+        x3 = x + i;
+        x2 = x + 2 * i;
+        y3 = y + j;
+        y2 = y + 2 * j;
+
+        if (0 <= x2 && x2 < plateau.taille && 0 <= y2 && y2 < plateau.taille) {
+          if (plateau.getPiece(x2, y2) == null && plateau.getPiece(x3, y3) != null) {
+            if (plateau.getPiece(x3, y3).joueur != this.joueur) {
+              coupsForces.add(new Coup(x, y, x2, y2, x3, y3));
+            }
           }
         }
       }
-    }
-
     }
 
     return coupsForces;

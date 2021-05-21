@@ -81,6 +81,16 @@ public class MaClassePrincipale {
                   }
                   i++;
                 }
+
+                i = 0;
+                while (i < coupsForces.size() && !coupLegal) {
+                  if (coupJoueur.equals(coupsForces.get(i))) {
+                    coupJoueur = coupsForces.get(i);
+                    coupLegal = true;
+                  }
+                  i++;
+                }
+
                 if (!coupLegal) {
                   Affichage.erreur("Coup invalide (Entrer \"!\" pour la listes des coups possibles).");
                 } else if (prisePossible && !coupJoueur.prise) {
