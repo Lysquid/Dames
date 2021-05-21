@@ -45,4 +45,8 @@ public class Joueur {
     return coupLegaux;
   }
 
+  public void enleverPiece(Piece piece) {
+    listePieces.remove(piece);
+  }
+
 }
