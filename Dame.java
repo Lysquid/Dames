@@ -7,6 +7,10 @@ public class Dame extends Piece {
     this.symbole = joueur.symbole_dame;
   }
 
+  /**
+   * Methode calculant la liste des coups légaux offerts au joueur actif, les coups 
+   * légaux sont ceux permettant un déplacement simple de la dame, sans prise.
+   */
   public ArrayList<Coup> calculerCoupsLegaux(Plateau plateau) {
     ArrayList<Coup> coupsLegaux = new ArrayList<Coup>();
     int x2;
@@ -26,7 +30,11 @@ public class Dame extends Piece {
     }
     return new ArrayList<Coup>();
   }
-
+  
+  /**
+   * Methode calculant la liste des coups forcés du joueur actif, les coups forcés sont 
+   * ceux où la prise d'un pion de l'équipe adverse est obligatoire.
+   */
   public ArrayList<Coup> calculerCoupsForces(Plateau plateau) {
     ArrayList<Coup> coupsForces = new ArrayList<Coup>();
     int x2;
@@ -37,11 +45,20 @@ public class Dame extends Piece {
       for (int j = -1; j <= 1; j += 2) {
         x2 = x + i;
         y2 = y + j;
-        while (plateau.getPiece(x2, y2) != null) {
-          while (plateau.getPiece(x2, y2).joueur != this.joueur) {
-
+        x3 = x + 2*i;
+        y3 = x + 2*j;
+        while (0 < x2 && 10 > x2 && 0 < y2 && 10 > y2){
+          while (plateau.getPiece(x2, y2) == null){
+            x2 += i;
+            y2 += j;
+            x3 += i;
+            y3 += j;
           }
-
+            if(plateau.getPiece(x2, y2).joueur != this.joueur) {
+                if(plateau.getPiece(x3,y3)) == null){
+                coupsForces.add(new Coup (x, y, x2, y2, x3, y3));
+            }
+          }
         }
       }
     }

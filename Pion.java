@@ -6,7 +6,11 @@ public class Pion extends Piece {
     super(joueur);
     this.symbole = joueur.symbole_pion;
   }
-
+  
+  /**
+   * Methode calculant la liste des coups légaux offerts au joueur actif, les coups 
+   * légaux sont ceux permettant un déplacement simple du pion, sans prise.
+   */
   public ArrayList<Coup> calculerCoupsLegaux(Plateau plateau) {
     ArrayList<Coup> coupsLegaux = new ArrayList<Coup>();
     int x2;
@@ -30,6 +34,10 @@ public class Pion extends Piece {
     return coupsLegaux;
   }
 
+  /**
+   * Methode calculant la liste des coups forcés du joueur actif, les coups forcés sont 
+   * ceux où la prise d'un pion de l'équipe adverse est obligatoire.
+   */
   public ArrayList<Coup> calculerCoupsForces(Plateau plateau) {
     ArrayList<Coup> coupsForces = new ArrayList<Coup>();
     int x2;

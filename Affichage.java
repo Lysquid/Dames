@@ -82,6 +82,10 @@ final public class Affichage {
     return scanner.nextLine();
   }
 
+
+  /**
+   * Methode convertissant l'input de l'utilisateur en un objet coup.
+   */
   public static Coup ConversionInputCoup(String commande, int taille) {
 
     int[] coords = new int[4];
@@ -90,7 +94,6 @@ final public class Affichage {
     int nbCoordTrouvees = 0;
     int coord;
     while (i < commande.length()) {
-
       coord = charToCoord(commande.charAt(i), (nbCoordTrouvees % 2 == 0));
 
       if (0 <= coord && coord <= taille) {
@@ -143,6 +146,10 @@ final public class Affichage {
     }
   }
 
+  /**
+   * Methode permettant d'indiquer au joueur quelles valeurs rentrer dans la console afin
+   * qu'il puisse joueur correctement.
+   */
   public static void aide() {
     System.out.println();
     System.out.println("Jeu de Dames");
