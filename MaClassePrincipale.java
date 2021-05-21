@@ -23,18 +23,13 @@ public class MaClassePrincipale {
         Affichage.effaceEcran();
         Affichage.afficher(plateau);
         Joueur joueurActif = joueurs[tour % 2];
-        boolean coupLegal = false;
-        boolean prisePossible = false;
+        Joueur joueurInactif = joueurs[(tour + 1) % 2];
 
         ArrayList<Coup> coupsLegaux = joueurActif.calculerCoupsLegaux(plateau);
-        ArrayList<Coup> coupsForces = new ArrayList<Coup>();
+        ArrayList<Coup> coupsForces = joueurActif.calculerCoupsForces(plateau);
 
-        for (Coup coup : coupsLegaux) {
-          if (coup.prise) {
-            coupsForces.add(coup);
-            prisePossible = true;
-          }
-        }
+        boolean prisePossible = !coupsForces.isEmpty();
+        boolean coupLegal = false;
 
         while (!coupLegal) {
 
@@ -87,11 +82,19 @@ public class MaClassePrincipale {
                   i++;
                 }
                 if (!coupLegal) {
-                  Affichage.erreur("Coup invalide (Entrer \"?\" pour la listes des coups possibles).");
+                  Affichage.erreur("Coup invalide (Entrer \"!\" pour la listes des coups possibles).");
                 } else if (prisePossible && !coupJoueur.prise) {
                   Affichage.erreur("Vous avez la possibilté de faire une prise, vous devez donc jouer un tel coup.");
                 } else {
-                  plateau.deplacerPiece(coupJoueur);
+                  // if (coupJoueur.prise) {
+                  // joueurInactif.
+                  // }
+                  plateau.jouerCoup(coupJoueur);
+                  if (coupJoueur.prise && !joueurActif.calculerCoupsForces(plateau).isEmpty()) {
+                    coupLegal = false;
+                  } else {
+                    tour++;
+                  }
                 }
               }
             }
@@ -99,7 +102,6 @@ public class MaClassePrincipale {
 
         }
 
-        tour++;
       }
 
     }

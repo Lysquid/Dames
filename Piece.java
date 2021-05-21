@@ -22,4 +22,6 @@ abstract public class Piece {
    */
   public abstract ArrayList<Coup> calculerCoupsLegaux(Plateau plateau);
 
+  public abstract ArrayList<Coup> calculerCoupsForces(Plateau plateau);
+
 }
