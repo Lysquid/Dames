@@ -74,18 +74,18 @@ public class MaClassePrincipale {
               } else {
 
                 int i = 0;
-                while (i < coupsLegaux.size() && !coupLegal) {
-                  if (coupJoueur.equals(coupsLegaux.get(i))) {
-                    coupJoueur = coupsLegaux.get(i);
+                while (i < coupsForces.size() && !coupLegal) {
+                  if (coupJoueur.equals(coupsForces.get(i))) {
+                    coupJoueur = coupsForces.get(i);
                     coupLegal = true;
                   }
                   i++;
                 }
 
                 i = 0;
-                while (i < coupsForces.size() && !coupLegal) {
-                  if (coupJoueur.equals(coupsForces.get(i))) {
-                    coupJoueur = coupsForces.get(i);
+                while (i < coupsLegaux.size() && !coupLegal) {
+                  if (coupJoueur.equals(coupsLegaux.get(i))) {
+                    coupJoueur = coupsLegaux.get(i);
                     coupLegal = true;
                   }
                   i++;
@@ -95,10 +95,11 @@ public class MaClassePrincipale {
                   Affichage.erreur("Coup invalide (Entrer \"!\" pour la listes des coups possibles).");
                 } else if (prisePossible && !coupJoueur.prise) {
                   Affichage.erreur("Vous avez la possibilté de faire une prise, vous devez donc jouer un tel coup.");
+                  coupLegal = false;
                 } else {
-                  // if (coupJoueur.prise) {
-                  // joueurInactif.
-                  // }
+                  if (coupJoueur.prise) {
+                    joueurInactif.enleverPiece(plateau.getPiece(coupJoueur.x3, coupJoueur.y3));
+                  }
                   plateau.jouerCoup(coupJoueur);
                   if (coupJoueur.prise && !joueurActif.calculerCoupsForces(plateau).isEmpty()) {
                     coupLegal = false;
@@ -112,7 +113,14 @@ public class MaClassePrincipale {
 
         }
 
+        if (joueurInactif.listePieces.isEmpty()) {
+          Joueur gagnant = joueurActif;
+          partie = false;
+        }
+
       }
+
+      
 
     }
 
