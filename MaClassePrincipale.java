@@ -22,16 +22,24 @@ public class MaClassePrincipale {
 
       while (partie) {
 
-        Affichage.effaceEcran();
+        // Affichage.effaceEcran();
         Affichage.afficher(plateau);
         Joueur joueurActif = joueurs[tour % 2];
         Joueur joueurInactif = joueurs[(tour + 1) % 2];
 
         ArrayList<Coup> coupsLegaux = joueurActif.calculerCoupsLegaux(plateau);
         ArrayList<Coup> coupsForces = joueurActif.calculerCoupsForces(plateau);
+        ArrayList<Coup> coupsLegauxEtForces = new ArrayList<Coup>();
+        coupsLegauxEtForces.addAll(coupsLegaux);
+        coupsLegauxEtForces.addAll(coupsForces);
 
         boolean prisePossible = !coupsForces.isEmpty();
         boolean coupLegal = false;
+
+        if (coupsLegauxEtForces.isEmpty()) {
+          Affichage.fin(plateau, joueurActif + " ne peux plus bouger, " + joueurInactif + " remporte la partie.");
+          coupLegal = true;
+        }
 
         while (!coupLegal) {
 
@@ -52,7 +60,7 @@ public class MaClassePrincipale {
           } else if (commande.equals("abandon")) {
             coupLegal = true;
             partie = false;
-            Affichage.fin(joueurInactif + " remporte la victoire par abandon de " + joueurActif + ".");
+            Affichage.fin(plateau, joueurInactif + " remporte la victoire par abandon de " + joueurActif + ".");
           } else if (commande.equals("quitter")) {
             coupLegal = true;
             partie = false;
@@ -66,6 +74,7 @@ public class MaClassePrincipale {
               } else {
                 coupJoueur = coupsForces.get(generateur.nextInt(coupsForces.size()));
               }
+              Affichage.coupOrdi(coupJoueur);
             } else {
               coupJoueur = Affichage.ConversionInputCoup(commande, plateau.taille);
             }
@@ -86,18 +95,9 @@ public class MaClassePrincipale {
               } else {
 
                 int i = 0;
-                while (i < coupsForces.size() && !coupLegal) {
-                  if (coupJoueur.equals(coupsForces.get(i))) {
-                    coupJoueur = coupsForces.get(i);
-                    coupLegal = true;
-                  }
-                  i++;
-                }
-
-                i = 0;
-                while (i < coupsLegaux.size() && !coupLegal) {
-                  if (coupJoueur.equals(coupsLegaux.get(i))) {
-                    coupJoueur = coupsLegaux.get(i);
+                while (i < coupsLegauxEtForces.size() && !coupLegal) {
+                  if (coupJoueur.equals(coupsLegauxEtForces.get(i))) {
+                    coupJoueur = coupsLegauxEtForces.get(i);
                     coupLegal = true;
                   }
                   i++;
@@ -114,7 +114,7 @@ public class MaClassePrincipale {
                   }
                   plateau.jouerCoup(coupJoueur);
                   if (coupJoueur.prise && !joueurActif.calculerCoupsForces(plateau).isEmpty()) {
-                    coupLegal = false;
+                    // rafle
                   } else {
                     tour++;
                   }
@@ -127,18 +127,19 @@ public class MaClassePrincipale {
 
         if (joueurInactif.listePieces.isEmpty()) {
           partie = false;
-          Affichage.fin(joueurActif + " remporte la victoire.");
+          Affichage.fin(plateau, joueurActif + " remporte la victoire.");
         }
 
       }
 
       boolean commandeValide = false;
       while (!commandeValide) {
-        Affichage.aideFin();
         String commande = Affichage.demanderCommandeFin();
-        if (commande == "r") {
+        if (commande.equals("?")) {
+          Affichage.aideFin();
+        } else if (commande.equals("r")) {
           commandeValide = true;
-        } else if (commande == "quitter") {
+        } else if (commande.equals("quitter")) {
           jeu = false;
           commandeValide = true;
         }

@@ -33,7 +33,7 @@ public class Coup {
     String string = "";
     string += Affichage.coordToChar(x1, true);
     string += Affichage.coordToChar(y1, false);
-    string += (prise) ? "x" : "-";
+    string += (prise) ? "*" : "-";
     string += Affichage.coordToChar(x2, true);
     string += Affichage.coordToChar(y2, false);
     return string;

@@ -31,7 +31,7 @@ final public class Affichage {
     }
     bordure_ligne += " " + SYMBOLE_COIN + ANSI_RESET;
 
-    affichage += bordure_ligne + "\n";
+    affichage += "\n" + bordure_ligne + "\n";
     for (int y = plateau.taille - 1; y >= 0; y--) {
       affichage += ANSI_BLACK + coordToChar(y, false) + ANSI_RESET;
       if (y % 2 == 0) {
@@ -164,12 +164,17 @@ final public class Affichage {
     System.out.println();
   }
 
-  public static void fin(String texte) {
+  public static void fin(Plateau plateau, String texte) {
+    afficher(plateau);
+    System.out.println();
     System.out.println("Fin de la partie");
     System.out.println(texte);
+    System.out.println();
+    aideFin();
   }
 
   public static void aideFin() {
+    System.out.println("Commandes :");
     System.out.println("r               Recommencer une partie");
     System.out.println("quitter         Quitte le jeu");
   }
@@ -177,6 +182,10 @@ final public class Affichage {
   public static String demanderCommandeFin() {
     System.out.print("> ");
     return scanner.nextLine();
+  }
+
+  public static void coupOrdi(Coup coupJoueur) {
+    System.out.println("ordi: " + coupJoueur);
   }
 
 }
