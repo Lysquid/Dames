@@ -37,4 +37,12 @@ public class Joueur {
     return coupLegaux;
   }
 
+  public ArrayList<Coup> calculerCoupsForces(Plateau plateau) {
+    ArrayList<Coup> coupLegaux = new ArrayList<Coup>();
+    for (Piece piece : listePieces) {
+      coupLegaux.addAll(piece.calculerCoupsForces(plateau));
+    }
+    return coupLegaux;
+  }
+
 }

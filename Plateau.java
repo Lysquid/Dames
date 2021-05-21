@@ -39,10 +39,13 @@ public class Plateau {
     grille[x][y] = null;
   }
 
-  public void deplacerPiece(Coup coup) {
+  public void jouerCoup(Coup coup) {
     Piece piece = getPiece(coup.x1, coup.y1);
     setPiece(piece, coup.x2, coup.y2);
     enleverPiece(coup.x1, coup.y1);
+    if (coup.prise) {
+      enleverPiece(coup.x3, coup.y3);
+    }
   }
 
 }
