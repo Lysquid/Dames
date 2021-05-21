@@ -26,7 +26,40 @@ public class Pion extends Piece {
       }
 
     }
+
     return coupsLegaux;
+  }
+
+  public ArrayList<Coup> calculerCoupsForces(Plateau plateau) {
+    ArrayList<Coup> coupsForces = new ArrayList<Coup>();
+    int x3;
+    int y3;
+    int x2;
+    int y2;
+
+    for (int i = -1; i <= 1; i += 2) {
+      x3 = x + i;
+      x2 = x +2*i;
+      if (joueur.blanc) {
+        y3 = y + 1;
+        y2 = y + 2*i;
+      } else {
+        y3 = y - 1;
+        y2 = y -2*i;
+      }
+
+      if (0 <= x3 && x3 < plateau.taille && 0 <= y3 && y3 < plateau.taille) {
+        if (plateau.getPiece(x3, y3).joueur != null) {
+          if (plateau.getPiece(x3, y3).joueur != Piece.joueur){
+          coupsForces.add(new Coup(x, y, x2, y2, true));
+          }
+        }
+      }
+    }
+
+    }
+
+    return coupsForces;
   }
 
 }

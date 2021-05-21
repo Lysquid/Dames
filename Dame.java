@@ -8,7 +8,39 @@ public class Dame extends Piece {
   }
 
   public ArrayList<Coup> calculerCoupsLegaux(Plateau plateau) {
+    ArrayList<Coup> coupsLegaux = new Arraylist<Coup>();
+    int x2;
+    int y2;
+    for (int i = -1; i <= 1; i += 2){
+      for (int j = -1 ; j <= 1; j+= 2){
+        x2 = x + i;
+        y2 = y + j
+        while (plateau.getPiece(x2,y2) == null){
+          while (0 <= x2 && 10 >= x2 && 0 <= y2 && 10 >= y2){
+            coupsLegaux.add(new Coup(x, y, x2, y2,false));
+            x2 += i;
+            y2 += j;
+            }
+          }
+        }
+      }
     return new ArrayList<Coup>();
   }
+  public ArrayList<Coup> calculerCoupsForces(Plateau plateau) {
+    ArrayList<Coup> coupsForces = new ArrayList<Coup>();
+    int x2;
+    int x3;
+    for (int i = -1; i <= 1; i += 2){
+      for (int j = -1 ; j <= 1; j+= 2){
+        x2 = x + i;
+        y2 = y + j;
+        while(plateau.getPiece.joueur(x2, y2) != null){
+          while(plateau.getPiece.joueur(x2, y2) != Piece.joueur);
+
+        }
+      }
+    }
+    return coupsForces;
+  } 
 
 }
