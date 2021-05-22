@@ -1,4 +1,3 @@
-
 final public class Options {
 
   public static final boolean J1_ORDI = false;

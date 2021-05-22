@@ -60,7 +60,7 @@ final public class Affichage {
   /**
    * Fonction fournie sur discord pour effacer l'écran
    */
-  public static void effaceEcran() {
+  public static void effacerEcran() {
     try {
       String os = System.getProperty("os.name");
       if (os.contains("Windows")) {
@@ -191,7 +191,7 @@ final public class Affichage {
 
   public static void coupJoue(Coup coupJoueur, Joueur joueur, Boolean coupAleatoire) {
     if (Options.EFFACER_ECRAN) {
-      effaceEcran();
+      effacerEcran();
     }
     if (Options.EFFACER_ECRAN || joueur.ordi) {
       System.out.print(joueur.fancyName() + " > ");
@@ -216,7 +216,9 @@ final public class Affichage {
   }
 
   public static void finRafle(Joueur joueurActif) {
-    System.out.println("La rafle de " + joueurActif + " est terminée.");
+    if (Options.EFFACER_ECRAN) {
+      System.out.println(joueurActif + " a joué une rafle.");
+    }
   }
 
 }

@@ -27,7 +27,6 @@ public class MaClassePrincipale {
 
       while (partie) {
 
-        // Affichage.effaceEcran();
         Affichage.afficher(plateau);
         Joueur joueurActif = joueurs[tour % 2];
         Joueur joueurInactif = joueurs[(tour + 1) % 2];
@@ -171,7 +170,7 @@ public class MaClassePrincipale {
           Affichage.aideFin();
         } else if (commande.equals("!")) {
           commandeValide = true;
-          Affichage.effaceEcran();
+          Affichage.effacerEcran();
         } else if (commande.equals("quitter")) {
           jeu = false;
           commandeValide = true;
