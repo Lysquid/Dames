@@ -3,17 +3,15 @@ import java.util.Scanner;
 
 final public class Affichage {
 
-  public static final boolean COULEUR_ACTIVEE = true;
-
-  public static final String ANSI_RESET = COULEUR_ACTIVEE ? "\u001B[0m" : "";
-  public static final String ANSI_BLACK = COULEUR_ACTIVEE ? "\u001B[30m" : "";
-  public static final String ANSI_RED = COULEUR_ACTIVEE ? "\u001B[31m" : "";
-  public static final String ANSI_GREEN = COULEUR_ACTIVEE ? "\u001B[32m" : "";
-  public static final String ANSI_YELLOW = COULEUR_ACTIVEE ? "\u001B[33m" : "";
-  public static final String ANSI_BLUE = COULEUR_ACTIVEE ? "\u001B[34m" : "";
-  public static final String ANSI_PURPLE = COULEUR_ACTIVEE ? "\u001B[35m" : "";
-  public static final String ANSI_CYAN = COULEUR_ACTIVEE ? "\u001B[36m" : "";
-  public static final String ANSI_WHITE = COULEUR_ACTIVEE ? "\u001B[37m" : "";
+  public static final String ANSI_RESET = Options.COULEUR ? "\u001B[0m" : "";
+  public static final String ANSI_BLACK = Options.COULEUR ? "\u001B[30m" : "";
+  public static final String ANSI_RED = Options.COULEUR ? "\u001B[31m" : "";
+  public static final String ANSI_GREEN = Options.COULEUR ? "\u001B[32m" : "";
+  public static final String ANSI_YELLOW = Options.COULEUR ? "\u001B[33m" : "";
+  public static final String ANSI_BLUE = Options.COULEUR ? "\u001B[34m" : "";
+  public static final String ANSI_PURPLE = Options.COULEUR ? "\u001B[35m" : "";
+  public static final String ANSI_CYAN = Options.COULEUR ? "\u001B[36m" : "";
+  public static final String ANSI_WHITE = Options.COULEUR ? "\u001B[37m" : "";
 
   private static final String SYMBOLE_COIN = "■";
   private static final String SYMBOLE_CASE = "▐█▌";
@@ -81,6 +79,7 @@ final public class Affichage {
 
     System.out.print(joueur.fancyName() + " > ");
     return scanner.nextLine();
+
   }
 
   /**
@@ -157,11 +156,11 @@ final public class Affichage {
   public static void aide() {
     System.out.println();
     System.out.println("Commandes :");
-    System.out.println("?               Afficher l'aide");
     System.out.println("!               Lister les coups possibles");
     System.out.println("*               Afficher à nouveau le plateau");
-    System.out.println("hist            Afficher l'historique des coups joués");
+    System.out.println("?               Afficher l'aide");
     System.out.println("abandon         Abandonner la partie");
+    System.out.println("hist            Afficher l'historique des coups joués");
     System.out.println("quitter         Quitter le jeu");
     System.out.println("Entrez votre coup dans le format [position initiale] [poisition finale]");
     System.out.println("Exemple : b3 a4");
@@ -173,14 +172,16 @@ final public class Affichage {
     System.out.println("Fin de la partie");
     System.out.println(texte);
     System.out.println("La partie a été jouée en " + tour + " coups.");
-    System.out.println();
     aideFin();
   }
 
   public static void aideFin() {
+    System.out.println();
     System.out.println("Commandes :");
-    System.out.println("r               Recommencer une partie");
+    System.out.println("!               Recommencer une partie");
+    System.out.println("?               Afficher l'aide");
     System.out.println("quitter         Quitter le jeu");
+    System.out.println();
   }
 
   public static String demanderCommandeFin() {
@@ -188,11 +189,20 @@ final public class Affichage {
     return scanner.nextLine();
   }
 
-  public static void coupJoue(Coup coupJoueur, Boolean coupOrdi) {
-    if (coupOrdi) {
-      System.out.println("ordi: " + coupJoueur);
+  public static void coupJoue(Coup coupJoueur, Joueur joueur, Boolean coupAleatoire) {
+    if (Options.EFFACER_ECRAN) {
+      effaceEcran();
+    }
+    if (Options.EFFACER_ECRAN || joueur.ordi) {
+      System.out.print(joueur.fancyName() + " > ");
+    }
+    System.out.print(coupJoueur);
+    if (joueur.ordi) {
+      System.out.println(" [ordi]");
+    } else if (coupAleatoire) {
+      System.out.println(" [coup aléatoire]");
     } else {
-      System.out.println(coupJoueur);
+      System.out.println();
     }
   }
 
@@ -203,6 +213,10 @@ final public class Affichage {
 
   public static void promotion(Piece pion, Piece dame) {
     System.out.println("Le pion " + pion + " en " + positionPiece(pion) + " a été promu en dame " + dame + ".");
+  }
+
+  public static void finRafle(Joueur joueurActif) {
+    System.out.println("La rafle de " + joueurActif + " est terminée.");
   }
 
 }

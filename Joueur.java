@@ -18,7 +18,7 @@ public class Joueur {
     this.couleur = couleur;
     this.ordi = ordi;
     listePieces = new ArrayList<Piece>();
-    if (Affichage.COULEUR_ACTIVEE) {
+    if (Options.COULEUR) {
       symbole_pion = "●";
       symbole_dame = "♥";
     } else {

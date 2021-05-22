@@ -9,8 +9,8 @@ public class MaClassePrincipale {
 
     while (jeu) {
 
-      Joueur J1 = new Joueur(true, "J1", Affichage.ANSI_CYAN, true);
-      Joueur J2 = new Joueur(false, "J2", Affichage.ANSI_RED, true);
+      Joueur J1 = new Joueur(true, "J1", Affichage.ANSI_CYAN, Options.J1_ORDI);
+      Joueur J2 = new Joueur(false, "J2", Affichage.ANSI_RED, Options.J2_ORDI);
       Joueur[] joueurs = { J1, J2 };
       Random generateur = new Random();
 
@@ -51,7 +51,10 @@ public class MaClassePrincipale {
 
         while (!coupLegal) {
 
-          String commande = Affichage.demanderCommande(joueurActif);
+          String commande = "";
+          if (!joueurActif.ordi) {
+            commande = Affichage.demanderCommande(joueurActif);
+          }
 
           if (commande.equals("?")) {
             Affichage.aide();
@@ -76,14 +79,14 @@ public class MaClassePrincipale {
           } else {
 
             Coup coupJoueur;
-            boolean coupOrdi = false;
-            if (joueurActif.ordi && commande.equals("")) {
+            boolean coupAleatoire = false;
+            if (joueurActif.ordi || (Options.COUP_ALEATOIRE && commande.equals(""))) {
               if (coupsForces.isEmpty()) {
                 coupJoueur = coupsLegaux.get(generateur.nextInt(coupsLegaux.size()));
               } else {
                 coupJoueur = coupsForces.get(generateur.nextInt(coupsForces.size()));
               }
-              coupOrdi = true;
+              coupAleatoire = true;
             } else if (coupsLegauxEtForces.size() == 1 && commande.equals("")) {
               coupJoueur = coupsLegauxEtForces.get(1);
             } else {
@@ -91,7 +94,7 @@ public class MaClassePrincipale {
             }
 
             if (coupJoueur == null) {
-              Affichage.erreur("Format invalide. Exemple : b3 a4    ");
+              Affichage.erreur("Format invalide. Exemple : b3 a4");
             } else {
 
               Piece pieceDeplacee = plateau.getPiece(coupJoueur.x1, coupJoueur.y1);
@@ -126,7 +129,7 @@ public class MaClassePrincipale {
                   }
                   // Coup
                   plateau.jouerCoup(coupJoueur);
-                  Affichage.coupJoue(coupJoueur, coupOrdi);
+                  Affichage.coupJoue(coupJoueur, joueurActif, coupAleatoire);
                   // Promotion
                   Piece piecePromue = plateau.promotion(pieceDeplacee, joueurActif);
                   if (piecePromue != null) {
@@ -141,7 +144,10 @@ public class MaClassePrincipale {
                     coupsForces = pieceDeplacee.calculerCoupsForces(plateau);
                     coupsLegauxEtForces.clear();
                   } else {
-                    rafle = false;
+                    if (rafle) {
+                      Affichage.finRafle(joueurActif);
+                      rafle = false;
+                    }
                     tour++;
                   }
                 }
@@ -163,8 +169,9 @@ public class MaClassePrincipale {
         String commande = Affichage.demanderCommandeFin();
         if (commande.equals("?")) {
           Affichage.aideFin();
-        } else if (commande.equals("r")) {
+        } else if (commande.equals("!")) {
           commandeValide = true;
+          Affichage.effaceEcran();
         } else if (commande.equals("quitter")) {
           jeu = false;
           commandeValide = true;
