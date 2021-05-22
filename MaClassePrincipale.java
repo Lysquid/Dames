@@ -20,6 +20,11 @@ public class MaClassePrincipale {
       boolean partie = true;
       int tour = 0;
 
+      boolean rafle = false;
+      ArrayList<Coup> coupsLegaux = new ArrayList<Coup>();
+      ArrayList<Coup> coupsForces = new ArrayList<Coup>();
+      ArrayList<Coup> coupsLegauxEtForces;
+
       while (partie) {
 
         // Affichage.effaceEcran();
@@ -27,9 +32,11 @@ public class MaClassePrincipale {
         Joueur joueurActif = joueurs[tour % 2];
         Joueur joueurInactif = joueurs[(tour + 1) % 2];
 
-        ArrayList<Coup> coupsLegaux = joueurActif.calculerCoupsLegaux(plateau);
-        ArrayList<Coup> coupsForces = joueurActif.calculerCoupsForces(plateau);
-        ArrayList<Coup> coupsLegauxEtForces = new ArrayList<Coup>();
+        if (!rafle) {
+          coupsLegaux = joueurActif.calculerCoupsLegaux(plateau);
+          coupsForces = joueurActif.calculerCoupsForces(plateau);
+        }
+        coupsLegauxEtForces = new ArrayList<Coup>();
         coupsLegauxEtForces.addAll(coupsLegaux);
         coupsLegauxEtForces.addAll(coupsForces);
 
@@ -69,13 +76,16 @@ public class MaClassePrincipale {
           } else {
 
             Coup coupJoueur;
+            boolean coupOrdi = false;
             if (joueurActif.ordi && commande.equals("")) {
               if (coupsForces.isEmpty()) {
                 coupJoueur = coupsLegaux.get(generateur.nextInt(coupsLegaux.size()));
               } else {
                 coupJoueur = coupsForces.get(generateur.nextInt(coupsForces.size()));
               }
-              Affichage.coupOrdi(coupJoueur);
+              coupOrdi = true;
+            } else if (coupsLegauxEtForces.size() == 1 && commande.equals("")) {
+              coupJoueur = coupsLegauxEtForces.get(1);
             } else {
               coupJoueur = Affichage.ConversionInputCoup(commande, plateau.taille);
             }
@@ -110,13 +120,28 @@ public class MaClassePrincipale {
                   Affichage.erreur("Vous avez la possibilté de faire une prise, vous devez donc jouer un tel coup.");
                   coupLegal = false;
                 } else {
+                  // Prise
                   if (coupJoueur.prise) {
                     joueurInactif.enleverPiece(plateau.getPiece(coupJoueur.x3, coupJoueur.y3));
                   }
+                  // Coup
                   plateau.jouerCoup(coupJoueur);
-                  if (coupJoueur.prise && !joueurActif.calculerCoupsForces(plateau).isEmpty()) {
-                    // rafle
+                  Affichage.coupJoue(coupJoueur, coupOrdi);
+                  // Promotion
+                  Piece piecePromue = plateau.promotion(pieceDeplacee, joueurActif);
+                  if (piecePromue != null) {
+                    Affichage.promotion(pieceDeplacee, piecePromue);
+                    pieceDeplacee = piecePromue;
+                  }
+                  // Rafle
+                  if (coupJoueur.prise && !pieceDeplacee.calculerCoupsForces(plateau).isEmpty()) {
+                    rafle = true;
+                    Affichage.rafle(joueurActif, pieceDeplacee);
+                    coupsLegaux.clear();
+                    coupsForces = pieceDeplacee.calculerCoupsForces(plateau);
+                    coupsLegauxEtForces.clear();
                   } else {
+                    rafle = false;
                     tour++;
                   }
                 }

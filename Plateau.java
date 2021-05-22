@@ -61,4 +61,16 @@ public class Plateau {
     return (0 <= x && x < taille && 0 <= y && y < taille);
   }
 
+  public Piece promotion(Piece piece, Joueur joueur) {
+    if (piece instanceof Pion) {
+      if ((joueur.blanc && piece.y == taille - 1) || (!joueur.blanc && piece.y == 0)) {
+        Dame dame = new Dame(joueur);
+        setPiece(dame, piece.x, piece.y);
+        joueur.enleverPiece(piece);
+        return dame;
+      }
+    }
+    return null;
+  }
+
 }

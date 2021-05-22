@@ -78,7 +78,7 @@ final public class Affichage {
 
   public static String demanderCommande(Joueur joueur) {
 
-    System.out.print(joueur + " > ");
+    System.out.print(joueur.fancyName() + " > ");
     return scanner.nextLine();
   }
 
@@ -129,6 +129,10 @@ final public class Affichage {
       coord += 48;
     }
     return (char) (coord);
+  }
+
+  public static String positionPiece(Piece piece) {
+    return "" + coordToChar(piece.x, true) + coordToChar(piece.y, false);
   }
 
   public static void quitter() {
@@ -184,8 +188,21 @@ final public class Affichage {
     return scanner.nextLine();
   }
 
-  public static void coupOrdi(Coup coupJoueur) {
-    System.out.println("ordi: " + coupJoueur);
+  public static void coupJoue(Coup coupJoueur, Boolean coupOrdi) {
+    if (coupOrdi) {
+      System.out.println("ordi: " + coupJoueur);
+    } else {
+      System.out.println(coupJoueur);
+    }
+  }
+
+  public static void rafle(Joueur joueur, Piece piece) {
+    System.out.println("Une rafle est possible, " + joueur + " continue à jouer en déplaçant la piece " + piece
+        + " située en " + positionPiece(piece) + ".");
+  }
+
+  public static void promotion(Piece pion, Piece dame) {
+    System.out.println("Le pion " + pion + " en " + positionPiece(pion) + " a été promu en dame " + dame + ".");
   }
 
 }

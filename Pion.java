@@ -13,10 +13,9 @@ public class Pion extends Piece {
    */
   public ArrayList<Coup> calculerCoupsLegaux(Plateau plateau) {
     ArrayList<Coup> coupsLegaux = new ArrayList<Coup>();
-    int x2;
-    int y2;
     for (int i = -1; i <= 1; i += 2) {
-      x2 = x + i;
+      int x2 = x + i;
+      int y2;
       if (joueur.blanc) {
         y2 = y + 1;
       } else {
@@ -40,18 +39,14 @@ public class Pion extends Piece {
    */
   public ArrayList<Coup> calculerCoupsForces(Plateau plateau) {
     ArrayList<Coup> coupsForces = new ArrayList<Coup>();
-    int x2;
-    int y2;
-    int x3;
-    int y3;
 
     for (int i = -1; i <= 1; i += 2) {
       for (int j = -1; j <= 1; j += 2) {
 
-        x3 = x + i;
-        x2 = x + 2 * i;
-        y3 = y + j;
-        y2 = y + 2 * j;
+        int x3 = x + i;
+        int y3 = y + j;
+        int x2 = x3 + i;
+        int y2 = y3 + j;
 
         if (plateau.dansPlateau(x2, y2)) {
           if (plateau.getPiece(x2, y2) == null && plateau.getPiece(x3, y3) != null) {

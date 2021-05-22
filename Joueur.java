@@ -23,12 +23,17 @@ public class Joueur {
       symbole_dame = "♠";
     } else {
       symbole_pion = blanc ? "●" : "○";
-      symbole_dame = blanc ? "♠" : "♣";
+      symbole_dame = blanc ? "♥" : "♡";
     }
+    // symbole unicode (peu lisibles) : ⛀⛁ ⛂⛃ couronnes : ♔♕♚♛
   }
 
   public String toString() {
     return couleur + name + Affichage.ANSI_RESET;
+  }
+
+  public String fancyName() {
+    return couleur + symbole_pion + " " + name + " " + symbole_dame + Affichage.ANSI_RESET;
   }
 
   public ArrayList<Coup> calculerCoupsLegaux(Plateau plateau) {
