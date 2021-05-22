@@ -1,11 +1,3 @@
 .vscode
-exemple.draw
-Main.class
-MaClassePrincipale.class
-Affichage.class
-Dame.class
-Joueur.class
-Piece.class
-Pion.class
-Plateau.class
-Coup.class
+*.class
+*.zip
