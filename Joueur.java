@@ -20,7 +20,7 @@ public class Joueur {
     listePieces = new ArrayList<Piece>();
     if (Affichage.COULEUR_ACTIVEE) {
       symbole_pion = "●";
-      symbole_dame = "♠";
+      symbole_dame = "♥";
     } else {
       symbole_pion = blanc ? "●" : "○";
       symbole_dame = blanc ? "♥" : "♡";

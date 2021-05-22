@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 final public class Affichage {
 
-  public static final boolean COULEUR_ACTIVEE = false;
+  public static final boolean COULEUR_ACTIVEE = true;
 
   public static final String ANSI_RESET = COULEUR_ACTIVEE ? "\u001B[0m" : "";
   public static final String ANSI_BLACK = COULEUR_ACTIVEE ? "\u001B[30m" : "";
@@ -17,6 +17,7 @@ final public class Affichage {
 
   private static final String SYMBOLE_COIN = "■";
   private static final String SYMBOLE_CASE = "▐█▌";
+  private static final String COULEUR_PLATEAU = ANSI_WHITE;
 
   private static Scanner scanner = new Scanner(System.in);
 
@@ -25,7 +26,7 @@ final public class Affichage {
     String affichage = "";
     String bordure_ligne = "";
 
-    bordure_ligne += ANSI_BLACK + SYMBOLE_COIN;
+    bordure_ligne += COULEUR_PLATEAU + SYMBOLE_COIN;
     for (int i = 0; i < plateau.taille; i++) {
       bordure_ligne += " " + coordToChar(i, true);
     }
@@ -33,7 +34,7 @@ final public class Affichage {
 
     affichage += "\n" + bordure_ligne + "\n";
     for (int y = plateau.taille - 1; y >= 0; y--) {
-      affichage += ANSI_BLACK + coordToChar(y, false) + ANSI_RESET;
+      affichage += COULEUR_PLATEAU + coordToChar(y, false) + ANSI_RESET;
       if (y % 2 == 0) {
         affichage += " ";
       }
@@ -46,13 +47,13 @@ final public class Affichage {
             affichage += " ";
           }
         } else {
-          affichage += ANSI_BLACK + SYMBOLE_CASE + ANSI_RESET;
+          affichage += COULEUR_PLATEAU + SYMBOLE_CASE + ANSI_RESET;
         }
       }
       if (y % 2 == 1) {
         affichage += " ";
       }
-      affichage += ANSI_BLACK + coordToChar(y, false) + ANSI_RESET + "\n";
+      affichage += COULEUR_PLATEAU + coordToChar(y, false) + ANSI_RESET + "\n";
     }
     affichage += bordure_ligne + "\n";
     System.out.println(affichage);
@@ -155,14 +156,13 @@ final public class Affichage {
    */
   public static void aide() {
     System.out.println();
-    System.out.println("Jeu de Dames");
     System.out.println("Commandes :");
-    System.out.println("?               Affiche l'aide");
-    System.out.println("!               Liste les coups possibles");
-    System.out.println("*               Affiche à nouveau le plateau");
-    System.out.println("hist            Affiche l'historique des coups joués");
-    System.out.println("abandon         Abandonné la partie");
-    System.out.println("quitter         Quitte le jeu");
+    System.out.println("?               Afficher l'aide");
+    System.out.println("!               Lister les coups possibles");
+    System.out.println("*               Afficher à nouveau le plateau");
+    System.out.println("hist            Afficher l'historique des coups joués");
+    System.out.println("abandon         Abandonner la partie");
+    System.out.println("quitter         Quitter le jeu");
     System.out.println("Entrez votre coup dans le format [position initiale] [poisition finale]");
     System.out.println("Exemple : b3 a4");
     System.out.println();
@@ -180,7 +180,7 @@ final public class Affichage {
   public static void aideFin() {
     System.out.println("Commandes :");
     System.out.println("r               Recommencer une partie");
-    System.out.println("quitter         Quitte le jeu");
+    System.out.println("quitter         Quitter le jeu");
   }
 
   public static String demanderCommandeFin() {

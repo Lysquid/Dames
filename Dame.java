@@ -31,7 +31,7 @@ public class Dame extends Piece {
         }
       }
     }
-    return new ArrayList<Coup>();
+    return coupsLegaux;
   }
 
   /**
