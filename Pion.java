@@ -4,7 +4,7 @@ public class Pion extends Piece {
 
   public Pion(Joueur joueur) {
     super(joueur);
-    this.symbole = joueur.symbole_pion;
+    this.symbole = joueur.symbolePion;
   }
 
   /**

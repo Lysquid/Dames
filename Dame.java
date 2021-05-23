@@ -4,7 +4,7 @@ public class Dame extends Piece {
 
   public Dame(Joueur joueur) {
     super(joueur);
-    this.symbole = joueur.symbole_dame;
+    this.symbole = joueur.symboleDame;
   }
 
   /**

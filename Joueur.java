@@ -7,10 +7,9 @@ public class Joueur {
   public ArrayList<Piece> listePieces;
   public String couleur;
   private String name;
-  public int[] historiqueCoups;
 
-  public String symbole_pion;
-  public String symbole_dame;
+  public String symbolePion;
+  public String symboleDame;
 
   public Joueur(boolean blanc, String name, String couleur, boolean ordi) {
     this.blanc = blanc;
@@ -19,11 +18,11 @@ public class Joueur {
     this.ordi = ordi;
     listePieces = new ArrayList<Piece>();
     if (Options.COULEUR) {
-      symbole_pion = "●";
-      symbole_dame = "♥";
+      symbolePion = "●";
+      symboleDame = "♥";
     } else {
-      symbole_pion = blanc ? "●" : "○";
-      symbole_dame = blanc ? "♥" : "♡";
+      symbolePion = blanc ? "●" : "○";
+      symboleDame = blanc ? "♥" : "♡";
     }
     // symbole unicode (peu lisibles) : ⛀⛁ ⛂⛃ couronnes : ♔♕♚♛
   }
@@ -33,7 +32,7 @@ public class Joueur {
   }
 
   public String fancyName() {
-    return couleur + symbole_pion + " " + name + " " + symbole_dame + Affichage.ANSI_RESET;
+    return couleur + symbolePion + " " + name + " " + symboleDame + Affichage.ANSI_RESET;
   }
 
   public ArrayList<Coup> calculerCoupsLegaux(Plateau plateau) {
