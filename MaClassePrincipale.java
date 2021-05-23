@@ -46,6 +46,7 @@ public class MaClassePrincipale {
           Affichage.fin(plateau, tour, joueurActif + " ne peux plus bouger, " + joueurInactif + " remporte la partie.");
           coupLegal = true;
           partie = false;
+          Afficher.listerCoups(historiqueCoups);
         }
 
         while (!coupLegal) {
@@ -70,6 +71,7 @@ public class MaClassePrincipale {
           } else if (commande.equals("abandon")) {
             coupLegal = true;
             partie = false;
+            Afficher.listerCoups(historiqueCoups);
             Affichage.fin(plateau, tour, joueurInactif + " remporte la victoire par abandon de " + joueurActif + ".");
           } else if (commande.equals("quitter")) {
             coupLegal = true;
@@ -159,6 +161,7 @@ public class MaClassePrincipale {
         if (joueurInactif.listePieces.isEmpty()) {
           partie = false;
           Affichage.fin(plateau, tour, joueurActif + " remporte la victoire.");
+          Afficher.listerCoups(historiqueCoups);
         }
 
       }

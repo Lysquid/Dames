@@ -11,6 +11,7 @@ public class Coup {
   public int y3;
   public boolean prise;
 
+  //constructeur d'un coup simple
   public Coup(int x1, int y1, int x2, int y2) {
     this.x1 = x1;
     this.y1 = y1;
@@ -18,6 +19,7 @@ public class Coup {
     this.y2 = y2;
   }
 
+  //constructeur d'un coup avec prise
   public Coup(int x1, int y1, int x2, int y2, int x3, int y3) {
     this(x1, y1, x2, y2);
     this.prise = true;

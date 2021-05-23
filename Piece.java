@@ -17,7 +17,8 @@ abstract public class Piece {
   }
 
   /**
-   * Methode abstraite calculant la liste de coups légaux, devant être implémentée
+   * Methode abstraite calculant la liste de coups légaux, devant 
+   * être implémentée
    * spécifiquement pour chaque type de pièce (pion et dame)
    */
   public abstract ArrayList<Coup> calculerCoupsLegaux(Plateau plateau);

@@ -2,6 +2,7 @@ public class Plateau {
 
   public int taille;
   private Piece[][] grille;
+  public ArrayList<Coup> historiqueCoups;
 
   public Plateau(int taille) {
     grille = new Piece[taille][taille];
@@ -55,6 +56,7 @@ public class Plateau {
     if (coup.prise) {
       enleverPiece(coup.x3, coup.y3);
     }
+    historiqueCoups.add(coup);
   }
 
   public boolean dansPlateau(int x, int y) {

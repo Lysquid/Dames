@@ -21,7 +21,7 @@ Piece
 + calculerCoupsLegaux(Plateau) : ArrayList<Coup>
 + calculerCoupsForces(Plateau) : ArrayList<Coup>
 
-Pion extends Peice
+Pion extends Piece
 + Pion(Joueur)
 + calculerCoupsLegaux(Plateau) : ArrayList<Coup>
 + calculerCoupsForces(Plateau) : ArrayList<Coup>
@@ -43,7 +43,7 @@ Coup
 + Coup(lnt, int int int, int, int)
 + equals(Coup) :
 + toString() : String
-+ surCaseBlanche() : bnlean
++ surCaseBlanche() : boolean
 
 Joueur
 + blanc
@@ -54,7 +54,7 @@ Joueur
 + historiqueCoups
 + symbole_pion
 + symbole_dame
-+ Joueur(boolean, String, String,
++ Joueur(boolean, String, String),
 + toString() : String
 + fancyName() : String
 + calculerCoupsLegaux(Plateau) : ArrayList<Coup>
