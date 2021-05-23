@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+
 public class Plateau {
 
   public int taille;
   private Piece[][] grille;
-  public ArrayList<Coup> historiqueCoups;
+  public ArrayList<Coup> historiqueCoups = new ArrayList<Coup>();
 
   public Plateau(int taille) {
     grille = new Piece[taille][taille];
