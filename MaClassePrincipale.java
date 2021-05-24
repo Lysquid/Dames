@@ -40,15 +40,15 @@ public class MaClassePrincipale {
         coupsLegauxEtForces.addAll(coupsForces);
 
         boolean prisePossible = !coupsForces.isEmpty();
-        boolean coupLegal = false;
+        boolean actionLegale = false;
 
         if (coupsLegauxEtForces.isEmpty()) {
           Affichage.fin(plateau, tour, joueurActif + " ne peux plus bouger, " + joueurInactif + " remporte la partie.");
-          coupLegal = true;
+          actionLegale = true;
           partie = false;
         }
 
-        while (!coupLegal) {
+        while (!actionLegale) {
 
           String commande = "";
           if (!joueurActif.ordi) {
@@ -68,11 +68,11 @@ public class MaClassePrincipale {
           } else if (commande.equals("hist")) {
             Affichage.listerCoups(plateau.historiqueCoups);
           } else if (commande.equals("abandon")) {
-            coupLegal = true;
+            actionLegale = true;
             partie = false;
             Affichage.fin(plateau, tour, joueurInactif + " remporte la victoire par abandon de " + joueurActif + ".");
           } else if (commande.equals("quitter")) {
-            coupLegal = true;
+            actionLegale = true;
             partie = false;
             jeu = false;
           } else {
@@ -87,7 +87,7 @@ public class MaClassePrincipale {
               }
               coupAleatoire = true;
             } else if (coupsLegauxEtForces.size() == 1 && commande.equals("")) {
-              coupJoueur = coupsLegauxEtForces.get(1);
+              coupJoueur = coupsLegauxEtForces.get(0);
             } else {
               coupJoueur = Affichage.ConversionInputCoup(commande, plateau.taille);
             }
@@ -108,19 +108,19 @@ public class MaClassePrincipale {
               } else {
 
                 int i = 0;
-                while (i < coupsLegauxEtForces.size() && !coupLegal) {
+                while (i < coupsLegauxEtForces.size() && !actionLegale) {
                   if (coupJoueur.equals(coupsLegauxEtForces.get(i))) {
                     coupJoueur = coupsLegauxEtForces.get(i);
-                    coupLegal = true;
+                    actionLegale = true;
                   }
                   i++;
                 }
 
-                if (!coupLegal) {
+                if (!actionLegale) {
                   Affichage.erreur("Coup invalide (Entrer \"!\" pour la listes des coups possibles).");
                 } else if (prisePossible && !coupJoueur.prise) {
                   Affichage.erreur("Vous avez la possibilté de faire une prise, vous devez donc jouer un tel coup.");
-                  coupLegal = false;
+                  actionLegale = false;
                 } else {
                   // Prise
                   if (coupJoueur.prise) {
