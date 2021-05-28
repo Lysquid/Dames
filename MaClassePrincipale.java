@@ -14,7 +14,7 @@ public class MaClassePrincipale {
       Joueur[] joueurs = { J1, J2 };
       Random generateur = new Random();
 
-      Plateau plateau = new Plateau(10);
+      Plateau plateau = new Plateau(Options.TAILLE_PLATEAU);
       plateau.configurationInitiale(J1, J2);
 
       boolean partie = true;
@@ -24,6 +24,8 @@ public class MaClassePrincipale {
       ArrayList<Coup> coupsLegaux = new ArrayList<Coup>();
       ArrayList<Coup> coupsForces = new ArrayList<Coup>();
       ArrayList<Coup> coupsLegauxEtForces;
+
+      Affichage.nouvellePartie(J1, J2);
 
       while (partie) {
 
@@ -86,14 +88,16 @@ public class MaClassePrincipale {
                 coupJoueur = coupsForces.get(generateur.nextInt(coupsForces.size()));
               }
               coupAleatoire = true;
-            } else if (coupsLegauxEtForces.size() == 1 && commande.equals("")) {
-              coupJoueur = coupsLegauxEtForces.get(0);
+            } else if (coupsForces.size() == 1 && commande.equals("")) {
+              coupJoueur = coupsForces.get(0);
+            } else if (coupsForces.isEmpty() && coupsLegaux.size() == 1 && commande.equals("")) {
+              coupJoueur = coupsLegaux.get(0);
             } else {
               coupJoueur = Affichage.ConversionInputCoup(commande, plateau.taille);
             }
 
             if (coupJoueur == null) {
-              Affichage.erreur("Format invalide. Exemple : b3 a4");
+              Affichage.ecrire("Format invalide. Entrer '?' pour afficher l'aide.");
             } else {
 
               Piece pieceDeplacee = plateau.getPiece(coupJoueur.x1, coupJoueur.y1);

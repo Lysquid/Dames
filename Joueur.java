@@ -24,7 +24,7 @@ public class Joueur {
       symbolePion = blanc ? "●" : "○";
       symboleDame = blanc ? "♥" : "♡";
     }
-    // symbole unicode (peu lisibles) : ⛀⛁ ⛂⛃ couronnes : ♔♕♚♛
+    // autres symboles (unicode, peu lisibles) : ⛀⛁ ⛂⛃ couronnes : ♔♕♚♛
   }
 
   public String toString() {

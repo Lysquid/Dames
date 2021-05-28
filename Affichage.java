@@ -48,7 +48,7 @@ final public class Affichage {
           affichage += COULEUR_PLATEAU + SYMBOLE_CASE + ANSI_RESET;
         }
       }
-      if (y % 2 == 1) {
+      if ((plateau.taille - y) % 2 == 1) {
         affichage += " ";
       }
       affichage += COULEUR_PLATEAU + coordToChar(y, false) + ANSI_RESET + "\n";
@@ -139,6 +139,10 @@ final public class Affichage {
     scanner.close();
   }
 
+  public static void ecrire(String texte) {
+    System.out.println(texte);
+  }
+
   public static void erreur(String texte) {
     System.out.println(texte + " Réessayez");
   }
@@ -219,6 +223,12 @@ final public class Affichage {
     if (Options.EFFACER_ECRAN) {
       System.out.println(joueurActif + " a joué une rafle.");
     }
+  }
+
+  public static void nouvellePartie(Joueur J1, Joueur J2) {
+    System.out.println(
+        J1.couleur + J1.symboleDame + ANSI_RESET + " Jeu de dames " + J2.couleur + J2.symboleDame + ANSI_RESET);
+    aide();
   }
 
 }
