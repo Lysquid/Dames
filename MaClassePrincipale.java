@@ -13,6 +13,7 @@ public class MaClassePrincipale {
       Joueur J2 = new Joueur(false, "J2", Affichage.ANSI_RED, Options.J2_ORDI);
       Joueur[] joueurs = { J1, J2 };
       Random generateur = new Random();
+      Affichage.nouvellePartie(J1, J2);
 
       Plateau plateau = new Plateau(Options.TAILLE_PLATEAU);
       plateau.configurationInitiale(J1, J2);
@@ -24,8 +25,6 @@ public class MaClassePrincipale {
       ArrayList<Coup> coupsLegaux = new ArrayList<Coup>();
       ArrayList<Coup> coupsForces = new ArrayList<Coup>();
       ArrayList<Coup> coupsLegauxEtForces;
-
-      Affichage.nouvellePartie(J1, J2);
 
       while (partie) {
 

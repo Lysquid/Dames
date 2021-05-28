@@ -44,11 +44,11 @@ public class Joueur {
   }
 
   public ArrayList<Coup> calculerCoupsForces(Plateau plateau) {
-    ArrayList<Coup> coupLegaux = new ArrayList<Coup>();
+    ArrayList<Coup> coupForces = new ArrayList<Coup>();
     for (Piece piece : listePieces) {
-      coupLegaux.addAll(piece.calculerCoupsForces(plateau));
+      coupForces.addAll(piece.calculerCoupsForces(plateau));
     }
-    return coupLegaux;
+    return coupForces;
   }
 
   public void enleverPiece(Piece piece) {
