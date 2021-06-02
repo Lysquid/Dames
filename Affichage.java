@@ -166,7 +166,7 @@ final public class Affichage {
     System.out.println("abandon         Abandonner la partie");
     System.out.println("hist            Afficher l'historique des coups joués");
     System.out.println("quitter         Quitter le jeu");
-    System.out.println("Entrez votre coup dans le format [position initiale] [poisition finale]");
+    System.out.println("Entrez votre coup dans le format [position initiale] [position finale]");
     System.out.println("Exemple : b3 a4");
     System.out.println();
   }
