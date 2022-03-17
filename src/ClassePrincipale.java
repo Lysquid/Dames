@@ -2,9 +2,9 @@ package src;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Main {
+public class ClassePrincipale {
 
-  public static void main(String[] args) {
+  public static void jouer(String[] args) {
 
     boolean jeu = true;
 
