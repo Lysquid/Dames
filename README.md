@@ -35,4 +35,4 @@ Download the file named `Draughts.jar` in the Releases section, and execute it b
 java -jar Draughts.jar
 ```
 
-Alternatively, the game can be run online on the [Replit page](https://replit.com/@Lysquid/Dames), or by opening the project in VS Code with the Java Extension Pack.
+Alternatively, the game can be run online on the [Replit page](https://replit.com/@Lysquid/Dames), or by opening the project in VS Code with the Extension Pack for Java installed.
