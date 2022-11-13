@@ -27,7 +27,7 @@ You can find help on commands by typing `?`. Note that the game is in French.
 
 ## Running the game
 
-Requirement : Java 11 or more recent
+Requirement : Java 11 or above
 
 Download the file named `Draughts.jar` in the Releases section, and execute it by typing in the command line :
 
